@@ -217,6 +217,65 @@
             .search-filter-wrapper { flex-direction: column; }
             .cart-sidebar { max-width: 100%; padding: 1.2rem; }
         }
+        @media (max-width: 850px) {
+    .nav-menu {
+        position: absolute;
+        top: 65px;
+        left: 0;
+        width: 100%;
+        background: var(--bg-card);
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 0;
+        gap: 1.5rem;
+        display: none;
+        border-bottom: 1px solid var(--gold-main);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-menu.active { display: flex; }
+    .mobile-toggle { display: block; }
+    .hero-content h1 { font-size: 2rem; }
+    .newsletter-form { flex-direction: column; }
+}
+
+@media (max-width: 600px) {
+    .navbar { padding: 0.7rem 1rem; }
+
+    .brand-logo img { height: 32px; }
+    .brand-title { font-size: 1rem; letter-spacing: 1px; }
+
+    .nav-right { gap: 0.6rem; }
+
+    .user-pill {
+        min-width: 0;
+        max-width: 130px;
+        padding: 0.35rem 0.6rem;
+        font-size: 0.72rem;
+    }
+
+    .user-pill #displayUser {
+        max-width: 75px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block;
+    }
+
+    .cart-icon-btn { font-size: 1.15rem; }
+}
+
+@media (max-width: 380px) {
+    .user-pill #displayUser { display: none; }
+    .user-pill {
+        max-width: 40px;
+        padding: 0.45rem;
+        justify-content: center;
+        gap: 0;
+    }
+    .user-pill .fa-circle-user { font-size: 1rem; }
+    .logout-btn { margin-left: 2px; font-size: 0.75rem; }
+}
     </style>
 
     <!-- Firebase client SDKs -->
