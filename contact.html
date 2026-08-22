@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELOBENZE VENTURES | Contact Us</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================
+           1. COLOR PALETTE & RESET
+           ========================================== */
+        :root {
+            --bg-main: #0a0a0a;
+            --bg-card: #141414;
+            --bg-alt: #1e1e1e;
+            --gold-main: #d4af37;
+            --gold-bright: #f9e282;
+            --gold-gradient: linear-gradient(135deg, #b8860b, #ffd700, #d4af37, #aa771c);
+            --text-light: #ffffff;
+            --text-muted: #a5a5a5;
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-light);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ==========================================
+           2. HEADER & NAVIGATION BAR
+           ========================================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 65px;
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            z-index: 9999;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .navbar {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .back-home-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gold-bright);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            background: rgba(212, 175, 55, 0.1);
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .back-home-btn:hover {
+            background: var(--gold-main);
+            color: #000;
+            transform: translateX(-3px);
+        }
+
+        .brand-title {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gold-bright);
+            letter-spacing: 2px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .user-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: var(--gold-bright);
+            background: rgba(212, 175, 55, 0.1);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .cart-icon-btn {
+            position: relative;
+            background: none;
+            border: none;
+            color: var(--gold-bright);
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 0.4rem;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -2px;
+            right: -4px;
+            background: var(--gold-main);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: bold;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ==========================================
+           3. HERO SECTION
+           ========================================== */
+        .contact-hero {
+            margin-top: 65px;
+            padding: 4.5rem 1.5rem 3.5rem;
+            background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.98)),
+                radial-gradient(circle at center, #2e240e 0%, #0a0a0a 100%);
+            text-align: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .contact-hero h1 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            color: var(--gold-bright);
+            margin-bottom: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .contact-hero p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* ==========================================
+           4. CONTACT CONTENT & FORM SECTION
+           ========================================== */
+        .contact-container {
+            max-width: 1280px;
+            margin: 4rem auto 5rem;
+            padding: 0 1.5rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 3rem;
+        }
+
+        /* Contact Info Cards */
+        .info-cards-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 10px;
+            padding: 1.8rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .info-card:hover {
+            border-color: var(--gold-bright);
+            background: var(--bg-alt);
+            transform: translateY(-3px);
+        }
+
+        .info-card i {
+            font-size: 1.8rem;
+            color: var(--gold-bright);
+            background: rgba(212, 175, 55, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .info-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: var(--gold-main);
+            margin-bottom: 0.3rem;
+        }
+
+        .info-card p, .info-card a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .info-card a:hover {
+            color: var(--gold-bright);
+        }
+
+        /* Contact Form */
+        .contact-form-wrapper {
+            background: var(--bg-card);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .contact-form-wrapper h2 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--gold-bright);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-form-wrapper p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.3rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            background: var(--bg-main);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 6px;
+            color: var(--text-light);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            border-color: var(--gold-bright);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .form-group select option {
+            background: var(--bg-main);
+            color: var(--text-light);
+        }
+
+        /* ==========================================
+           5. CART SLIDE-OUT PANEL
+           ========================================== */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .cart-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 420px;
+            height: 100dvh;
+            background: var(--bg-card);
+            border-left: 1px solid var(--gold-main);
+            z-index: 100000;
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.3s ease;
+            overflow: hidden;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding-bottom: 1rem;
+        }
+
+        .cart-header h3 {
+            font-family: var(--font-heading);
+            color: var(--gold-bright);
+        }
+
+        .close-cart-btn {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            margin: 1.2rem 0;
+            padding-right: 5px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            background: var(--bg-alt);
+            padding: 0.8rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.8rem;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .cart-item-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            object-fit: cover;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .cart-item-price {
+            color: var(--gold-bright);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 0.4rem;
+        }
+
+        .qty-btn {
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid var(--gold-main);
+            color: var(--gold-bright);
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .qty-btn:hover {
+            background: var(--gold-main);
+            color: #000;
+        }
+
+        .qty-val {
+            font-size: 0.85rem;
+            font-weight: 600;
+            min-width: 18px;
+            text-align: center;
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            color: #ff5555;
+            cursor: pointer;
+            padding: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .cart-footer {
+            flex-shrink: 0;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            padding-top: 1rem;
+            background: var(--bg-card);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .btn-gold {
+            width: 100%;
+            background: var(--gold-gradient);
+            color: #000;
+            border: none;
+            padding: 0.9rem;
+            font-family: var(--font-body);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* ==========================================
+           6. FOOTER
+           ========================================== */
+        footer {
+            background: var(--bg-card);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 3rem 1.5rem 1.5rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 850px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-hero h1 {
+                font-size: 2rem;
+            }
+
+            .cart-sidebar {
+                max-width: 100%;
+                padding: 1.2rem;
+            }
+        }
+    </style>
+    <script>
+    // Check localStorage directly without declaring a variable
+    if (!localStorage.getItem('elobenze_user')) {
+        // Not logged in -> Redirect immediately to login.html
+        window.location.href = 'login.html';
+    } else {
+        // Logged in -> Unhide page body when ready
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.display = 'block';
+        });
+    }
+</script>
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="brand-logo">
+                <a href="index.html" class="back-home-btn">
+                    <i class="fa-solid fa-arrow-left"></i> Home
+                </a>
+                <span class="brand-title">ELOBENZE</span>
+            </div>
+
+            <div class="nav-right">
+                <div class="user-pill" id="userPill">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span id="displayUser">Client</span>
+                </div>
+
+                <button class="cart-icon-btn" id="cartBtn" aria-label="Shopping Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="contact-hero">
+        <h1>VIP CONCIERGE & SUPPORT</h1>
+        <p>Have a question about our children’s clothing, sizing, orders, or delivery? We’re here to help—feel free to get in touch with us anytime.</p>
+    </section>
+
+    <main class="contact-container">
+        <div class="contact-grid">
+            
+            <div class="info-cards-wrapper">
+                <div class="info-card">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <h3>Flagship Showroom</h3>
+                        <p>shop2,annyplaza
+                        8/10 obun eko street,
+                        Eyin eyo bus stop, idumota, lagos island,
+                        Nigeria</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <i class="fa-solid fa-phone"></i>
+                    <div>
+                        <h3>Direct Telephone</h3>
+                        <p><a href="tel:+2348038053363">+234 803 805 336 3</a></p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <i class="fa-solid fa-envelope"></i>
+                    <div>
+                        <h3>Electronic Mail</h3>
+                        <p><a href="mailto:elobenzewears2@gmail.com">elobenzewears2@gmail.com</a></p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <i class="fa-solid fa-clock"></i>
+                    <div>
+                        <h3>Operating Hours</h3>
+                        <p>Monday – Saturday: 9:00 AM – 7:00 PM</p>
+                        <p>Sunday: Closed</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-wrapper">
+                <h2>Send Us a Message</h2>
+                <p>Fill out the form below and a luxury concierge representative will contact you within 2 hours.</p>
+
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" placeholder="Chief / Dr. / Mr. / Mrs." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="emailAddr">Email Address</label>
+                        <input type="email" id="emailAddr" placeholder="client@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subjectSelect">Inquiry Type</label>
+                        <select id="subjectSelect" required>
+                            <option value="">Select an Inquiry Type</option>
+                            <option value="Custom Order">Custom Jewelry / Sizing Inquiry</option>
+                            <option value="Order Status">Order Tracking & Delivery Status</option>
+                            <option value="Showroom Booking">Showroom Private Appointment</option>
+                            <option value="General Support">General Support</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="messageBox">Message</label>
+                        <textarea id="messageBox" rows="5" placeholder="State your requirements or questions in detail..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-gold">Submit Request</button>
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 ELOBENZE VENTURES. All Rights Reserved.</p>
+    </footer>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Bag</h3>
+            <button class="close-cart-btn" id="closeCartBtn">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItemsContainer"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotalAmount">₦0.00</span>
+            </div>
+            <button class="btn-gold" id="checkoutBtn">Place Order</button>
+        </div>
+    </aside>
+
+    <!-- Firebase client SDKs (compat) + save helper -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCpkKNfN-TUmDXsrZirXx0cmKVij37ayS4",
+            authDomain: "elobenze-ventures.firebaseapp.com",
+            projectId: "elobenze-ventures",
+            storageBucket: "elobenze-ventures.firebasestorage.app",
+            messagingSenderId: "52764302594",
+            appId: "1:52764302594:web:f8cfcb21d9e740b676761b",
+            measurementId: "G-9JKFVB1GW8"
+        };
+        if (!window.firebase || !firebase.apps?.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const fbDb = firebase.firestore();
+
+        async function saveOrderToFirestore(order) {
+            try {
+                const docRef = await fbDb.collection('orders').add(order);
+                return docRef.id;
+            } catch (err) {
+                console.error('Firestore save failed', err);
+                throw err;
+            }
+        }
+    </script>
+
+    <script>
+        // State synced with LocalStorage
+        let currentUser = localStorage.getItem('elobenze_user') || 'Client';
+        let cart = JSON.parse(localStorage.getItem('elobenze_cart')) || [];
+
+        // DOM References
+        const displayUser = document.getElementById('displayUser');
+        const contactForm = document.getElementById('contactForm');
+        const cartBtn = document.getElementById('cartBtn');
+        const closeCartBtn = document.getElementById('closeCartBtn');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const cartItemsContainer = document.getElementById('cartItemsContainer');
+        const cartBadge = document.getElementById('cartBadge');
+        const cartTotalAmount = document.getElementById('cartTotalAmount');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+
+        // Currency Formatter
+        function formatNaira(amount) {
+            return '₦' + amount.toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        displayUser.innerText = currentUser;
+
+        // Contact Form Submission Logic
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('fullName').value;
+            alert(`Thank you, ${name}!\n\nYour message has been dispatched to our VIP Concierge team. We will get back to you shortly.`);
+            contactForm.reset();
+        });
+
+        // Cart Actions
+        function updateQuantity(id, delta) {
+            const index = cart.findIndex(item => item.id === id);
+            if (index > -1) {
+                cart[index].quantity = (cart[index].quantity || 1) + delta;
+                if (cart[index].quantity <= 0) {
+                    cart.splice(index, 1);
+                }
+                saveCartAndUpdate();
+            }
+        }
+
+        function removeFromCart(id) {
+            const index = cart.findIndex(item => item.id === id);
+            if (index > -1) {
+                cart.splice(index, 1);
+                saveCartAndUpdate();
+            }
+        }
+
+        function saveCartAndUpdate() {
+            localStorage.setItem('elobenze_cart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const totalCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+            cartBadge.innerText = totalCount;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p style="text-align: center; color: var(--text-muted); margin-top: 2rem;">Your cart is empty.</p>';
+                cartTotalAmount.innerText = '₦0.00';
+                return;
+            }
+
+            cartItemsContainer.innerHTML = cart.map((item) => `
+                <div class="cart-item">
+                    <img src="${item.imgUrl || 'https://via.placeholder.com/60'}" alt="${item.name}" class="cart-item-img">
+                    <div class="cart-item-details">
+                        <div class="cart-item-title">${item.name}</div>
+                        <div class="cart-item-price">${formatNaira(item.price * (item.quantity || 1))}</div>
+                        <div class="qty-controls">
+                            <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                            <span class="qty-val">${item.quantity || 1}</span>
+                            <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                        </div>
+                    </div>
+                    <button class="remove-btn" onclick="removeFromCart(${item.id})">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+
+            const total = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+            cartTotalAmount.innerText = formatNaira(total);
+        }
+
+        // Drawer Controls
+        function openCart() {
+            cartSidebar.classList.add('active');
+            cartOverlay.classList.add('active');
+        }
+
+        function closeCart() {
+            cartSidebar.classList.remove('active');
+            cartOverlay.classList.remove('active');
+        }
+
+        cartBtn.addEventListener('click', openCart);
+        closeCartBtn.addEventListener('click', closeCart);
+        cartOverlay.addEventListener('click', closeCart);
+
+        checkoutBtn.addEventListener('click', async () => {
+            if (cart.length === 0) {
+                alert("Your cart is empty.");
+                return;
+            }
+            const total = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+            const order = {
+                name: currentUser,
+                items: cart,
+                total,
+                date: new Date().toISOString()
+            };
+            try {
+                    showLoader('Placing order...');
+                    const id = await saveOrderToFirestore(order);
+                alert(`Order placed successfully! Reference: ${id}`);
+            } catch (err) {
+                const localOrders = JSON.parse(localStorage.getItem('elobenze_orders') || '[]');
+                localOrders.push(order);
+                localStorage.setItem('elobenze_orders', JSON.stringify(localOrders));
+                alert('Order saved locally. We will sync when connection is available.');
+            }
+                hideLoader();
+                cart = [];
+            saveCartAndUpdate();
+            closeCart();
+        });
+
+        updateCartUI();
+    </script>
+</body>
+
+</html>

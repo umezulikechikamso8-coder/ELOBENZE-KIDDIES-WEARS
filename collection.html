@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELOBENZE VENTURES | Exclusive Collection</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-main: #0a0a0a;
+            --bg-card: #141414;
+            --bg-alt: #1e1e1e;
+            --gold-main: #d4af37;
+            --gold-bright: #f9e282;
+            --gold-gradient: linear-gradient(135deg, #b8860b, #ffd700, #d4af37, #aa771c);
+            --text-light: #ffffff;
+            --text-muted: #a5a5a5;
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { background-color: var(--bg-main); color: var(--text-light); font-family: var(--font-body); overflow-x: hidden; display: none; }
+        a { text-decoration: none; color: inherit; }
+
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; height: 65px;
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            z-index: 9999;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .navbar { max-width: 1280px; margin: 0 auto; padding: 0.8rem 1.5rem; display: flex; justify-content: space-between; align-items: center; height: 100%; }
+        .brand-logo { display: flex; align-items: center; gap: 12px; }
+
+        .back-home-btn {
+            display: flex; align-items: center; gap: 8px;
+            color: var(--gold-bright); font-size: 0.9rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px;
+            transition: var(--transition);
+            background: rgba(212, 175, 55, 0.1);
+            padding: 0.4rem 0.9rem; border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .back-home-btn:hover { background: var(--gold-main); color: #000; transform: translateX(-3px); }
+
+        .brand-title { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; color: var(--gold-bright); letter-spacing: 2px; }
+        .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+
+        .user-pill {
+            display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--gold-bright);
+            background: rgba(212, 175, 55, 0.1); padding: 0.4rem 0.8rem; border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .cart-icon-btn { position: relative; background: none; border: none; color: var(--gold-bright); font-size: 1.3rem; cursor: pointer; padding: 0.4rem; }
+
+        .cart-badge {
+            position: absolute; top: -2px; right: -4px; background: var(--gold-main); color: #000;
+            font-size: 0.7rem; font-weight: bold; width: 18px; height: 18px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .collection-hero {
+            margin-top: 65px;
+            padding: 4rem 1.5rem 3rem;
+            background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.98)),
+                radial-gradient(circle at center, #2e240e 0%, #0a0a0a 100%);
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .collection-hero h1 { font-family: var(--font-heading); font-size: 2.5rem; color: var(--gold-bright); margin-bottom: 0.5rem; letter-spacing: 2px; }
+        .collection-hero p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; }
+
+        .search-filter-wrapper { max-width: 800px; margin: 0 auto; display: flex; gap: 1rem; flex-wrap: wrap; }
+        .search-box { flex: 2; position: relative; min-width: 260px; }
+
+        .search-box input {
+            width: 100%; padding: 0.9rem 1rem 0.9rem 3rem;
+            background: var(--bg-card); border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px; color: var(--text-light); font-family: var(--font-body);
+            font-size: 0.95rem; outline: none; transition: var(--transition);
+        }
+
+        .search-box input:focus { border-color: var(--gold-bright); box-shadow: 0 0 12px rgba(212, 175, 55, 0.25); }
+        .search-box i { position: absolute; left: 1.1rem; top: 50%; transform: translateY(-50%); color: var(--gold-main); font-size: 1.1rem; }
+
+        .filter-select {
+            flex: 1; min-width: 180px; padding: 0.9rem 1rem;
+            background: var(--bg-card); border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px; color: var(--text-light); font-family: var(--font-body);
+            font-size: 0.95rem; outline: none; cursor: pointer;
+        }
+
+        .filter-select option { background: var(--bg-card); color: var(--text-light); }
+
+        .catalog-container { max-width: 1280px; margin: 3rem auto 5rem; padding: 0 1.5rem; }
+        .results-count { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2rem; }
+
+        .product-card {
+            background: var(--bg-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 8px;
+            padding: 1.2rem; display: flex; flex-direction: column; justify-content: space-between;
+            transition: var(--transition);
+        }
+
+        .product-card:hover { border-color: var(--gold-bright); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6); }
+        .product-card-img-wrapper { height: 220px; background: var(--bg-alt); border-radius: 6px; overflow: hidden; margin-bottom: 1rem; }
+        .product-card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .product-card:hover .product-card-img-wrapper img { transform: scale(1.05); }
+
+        .product-category-tag { font-size: 0.75rem; text-transform: uppercase; color: var(--gold-main); letter-spacing: 1px; margin-bottom: 0.3rem; }
+        .product-name { font-family: var(--font-heading); font-size: 1.05rem; margin-bottom: 0.4rem; }
+        .product-price { color: var(--gold-bright); font-weight: 700; font-size: 1.15rem; margin-bottom: 1rem; }
+
+        .add-cart-btn {
+            background: transparent; color: var(--gold-main); border: 1px solid var(--gold-main);
+            padding: 0.7rem; border-radius: 4px; font-weight: 600; text-transform: uppercase;
+            font-size: 0.8rem; letter-spacing: 1px; cursor: pointer; transition: var(--transition);
+        }
+
+        .add-cart-btn:hover { background: var(--gold-main); color: #000; }
+
+        .no-results { text-align: center; grid-column: 1 / -1; padding: 4rem 1rem; color: var(--text-muted); }
+        .no-results i { font-size: 3rem; color: var(--gold-main); margin-bottom: 1rem; }
+
+        .cart-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8);
+            z-index: 2000; opacity: 0; visibility: hidden; transition: var(--transition);
+        }
+
+        .cart-overlay.active { opacity: 1; visibility: visible; }
+
+        .cart-sidebar {
+            position: fixed; top: 0; right: -100%; width: 100%; max-width: 420px; height: 100dvh;
+            background: var(--bg-card); border-left: 1px solid var(--gold-main); z-index: 100000;
+            padding: 1.8rem; display: flex; flex-direction: column; transition: right 0.3s ease; overflow: hidden;
+        }
+
+        .cart-sidebar.active { right: 0; }
+
+        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 1rem; }
+        .cart-header h3 { font-family: var(--font-heading); color: var(--gold-bright); }
+        .close-cart-btn { background: none; border: none; color: var(--text-light); font-size: 1.5rem; cursor: pointer; }
+
+        .cart-items { flex: 1; min-height: 0; overflow-y: auto; margin: 1.2rem 0; padding-right: 5px; }
+
+        .cart-item {
+            display: flex; gap: 12px; align-items: center; background: var(--bg-alt);
+            padding: 0.8rem 1rem; border-radius: 6px; margin-bottom: 0.8rem; border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .cart-item-img { width: 60px; height: 60px; border-radius: 4px; object-fit: cover; border: 1px solid rgba(212, 175, 55, 0.2); }
+        .cart-item-details { flex: 1; }
+        .cart-item-title { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; }
+        .cart-item-price { color: var(--gold-bright); font-size: 0.85rem; font-weight: 600; }
+        .qty-controls { display: flex; align-items: center; gap: 6px; margin-top: 0.4rem; }
+
+        .qty-btn {
+            background: rgba(212, 175, 55, 0.15); border: 1px solid var(--gold-main); color: var(--gold-bright);
+            width: 22px; height: 22px; border-radius: 4px; cursor: pointer; font-weight: bold;
+            display: flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: var(--transition);
+        }
+
+        .qty-btn:hover { background: var(--gold-main); color: #000; }
+        .qty-val { font-size: 0.85rem; font-weight: 600; min-width: 18px; text-align: center; }
+        .remove-btn { background: none; border: none; color: #ff5555; cursor: pointer; padding: 0.3rem; font-size: 0.9rem; }
+
+        .cart-footer { flex-shrink: 0; border-top: 1px solid rgba(212, 175, 55, 0.2); padding-top: 1rem; background: var(--bg-card); }
+        .cart-total { display: flex; justify-content: space-between; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; }
+
+        .btn-gold {
+            width: 100%; background: var(--gold-gradient); color: #000; border: none; padding: 0.9rem;
+            font-family: var(--font-body); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+            border-radius: 6px; cursor: pointer; transition: var(--transition); display: inline-block; text-align: center;
+        }
+
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
+
+        footer { background: var(--bg-card); border-top: 1px solid rgba(212, 175, 55, 0.2); padding: 3rem 1.5rem 1.5rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+
+        #globalLoader {
+            position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+            background: var(--bg-main); z-index: 100000;
+        }
+
+        #globalLoader .loader {
+            background: var(--bg-card); padding: 16px 18px; border-radius: 8px; display: flex; gap: 12px;
+            align-items: center; color: var(--text-light); border: 1px solid rgba(212, 175, 55, 0.12);
+        }
+
+        #globalLoader .spinner {
+            width: 26px; height: 26px; border: 4px solid rgba(255, 255, 255, 0.12);
+            border-top-color: var(--gold-bright); border-radius: 50%; animation: spin .9s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        @media (max-width: 600px) {
+            .collection-hero h1 { font-size: 1.8rem; }
+            .search-filter-wrapper { flex-direction: column; }
+            .cart-sidebar { max-width: 100%; padding: 1.2rem; }
+        }
+    </style>
+
+    <!-- Firebase client SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCpkKNfN-TUmDXsrZirXx0cmKVij37ayS4",
+            authDomain: "elobenze-ventures.firebaseapp.com",
+            projectId: "elobenze-ventures",
+            storageBucket: "elobenze-ventures.firebasestorage.app",
+            messagingSenderId: "52764302594",
+            appId: "1:52764302594:web:f8cfcb21d9e740b676761b",
+            measurementId: "G-9JKFVB1GW8"
+        };
+
+        if (!window.firebase || !firebase.apps?.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+
+        const fbAuth = firebase.auth();
+        const fbDb = firebase.firestore();
+    </script>
+</head>
+
+<body>
+
+    <div id="globalLoader">
+        <div class="loader"><div class="spinner"></div><div class="loader-text">Loading collection...</div></div>
+    </div>
+
+    <header>
+        <nav class="navbar">
+            <div class="brand-logo">
+                <a href="index.html" class="back-home-btn">
+                    <i class="fa-solid fa-arrow-left"></i> Home
+                </a>
+                <span class="brand-title">ELOBENZE</span>
+            </div>
+
+            <div class="nav-right">
+                <div class="user-pill" id="userPill">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span id="displayUser">Client</span>
+                </div>
+
+                <button class="cart-icon-btn" id="cartBtn" aria-label="Shopping Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="collection-hero" id="collectionHero">
+        <h1 id="collectionTitleText">EXCLUSIVE COLLECTION</h1>
+        <p>Explore our carefully curated collection of stylish, comfortable, and high-quality children's clothing,
+            designed to keep your little ones looking their best for every occasion.</p>
+
+        <div class="search-filter-wrapper">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="Search luxury items (e.g. Watch, Ring, Leather)...">
+            </div>
+
+            <select class="filter-select" id="categoryFilter">
+                <option value="all">All Categories</option>
+                <option value="Boys">Boys</option>
+                <option value="Girls">Girls</option>
+            </select>
+        </div>
+    </section>
+
+    <main class="catalog-container">
+        <div class="results-count" id="resultsCount">Showing all items</div>
+        <div class="product-grid" id="productGrid">
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 ELOBENZE VENTURES. All Rights Reserved.</p>
+    </footer>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Bag</h3>
+            <button class="close-cart-btn" id="closeCartBtn">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItemsContainer">
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotalAmount">₦0.00</span>
+            </div>
+            <button class="btn-gold" id="checkoutBtn">Place Order</button>
+        </div>
+    </aside>
+
+    <script>
+        function showLoader(msg) {
+            const el = document.getElementById('globalLoader');
+            if (el) { el.querySelector('.loader-text').innerText = msg || 'Please wait...'; el.style.display = 'flex'; }
+        }
+        function hideLoader() {
+            const el = document.getElementById('globalLoader');
+            if (el) el.style.display = 'none';
+        }
+
+        // Fallback catalog if Firestore has nothing tagged for this page yet.
+        const DEFAULT_PRODUCTS = [
+            { id: 'default-1', name: "Gold Chronograph Watch", price: 450000, category: "Boys", page: "collection", imgUrl: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500&auto=format&fit=crop&q=60" },
+            { id: 'default-2', name: "Luxury Leather Wallet", price: 120000, category: "Girls", page: "collection", imgUrl: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=500&auto=format&fit=crop&q=60" },
+            { id: 'default-3', name: "Royal Signet Ring", price: 280000, category: "Boys", page: "collection", imgUrl: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500&auto=format&fit=crop&q=60" },
+            { id: 'default-4', name: "Designer Sunglasses", price: 195000, category: "Girls", page: "collection", imgUrl: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500&auto=format&fit=crop&q=60" }
+        ];
+
+        let products = [];
+        let currentUser = null;
+        let cart = JSON.parse(localStorage.getItem('elobenze_cart')) || [];
+
+        const productGrid = document.getElementById('productGrid');
+        const searchInput = document.getElementById('searchInput');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const resultsCount = document.getElementById('resultsCount');
+        const displayUser = document.getElementById('displayUser');
+        const cartBtn = document.getElementById('cartBtn');
+        const closeCartBtn = document.getElementById('closeCartBtn');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const cartItemsContainer = document.getElementById('cartItemsContainer');
+        const cartBadge = document.getElementById('cartBadge');
+        const cartTotalAmount = document.getElementById('cartTotalAmount');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+
+        function formatNaira(amount) {
+            return '₦' + Number(amount).toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        // ---- AUTH gate: same pattern as index.html ----
+        fbAuth.onAuthStateChanged(user => {
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+            currentUser = user;
+            displayUser.innerText = user.email || 'Client';
+            document.body.style.display = 'block';
+            hideLoader();
+            loadCms();
+            loadProducts();
+        });
+
+        // ---- CMS: collection banner/title from Firestore ----
+        function loadCms() {
+            fbDb.collection('cms').doc('config').get().then(doc => {
+                if (!doc.exists) return;
+                const cfg = doc.data();
+                if (cfg.collectionTitle) document.getElementById('collectionTitleText').innerText = cfg.collectionTitle;
+                if (cfg.collectionBannerUrl) {
+                    const hero = document.getElementById('collectionHero');
+                    hero.style.backgroundImage = `linear-gradient(rgba(10,10,10,0.85), rgba(10,10,10,0.98)), url('${cfg.collectionBannerUrl}')`;
+                }
+            }).catch(err => console.error('CMS load failed', err));
+        }
+
+        // ---- PRODUCTS: live from Firestore, filtered for this page ----
+        function loadProducts() {
+            fbDb.collection('products').onSnapshot(snapshot => {
+                const items = [];
+                snapshot.forEach(doc => items.push({ id: doc.id, ...doc.data() }));
+                const collectionItems = items.filter(p => p.page === 'collection' || p.page === 'both' || !p.page);
+                products = collectionItems.length > 0 ? collectionItems : DEFAULT_PRODUCTS;
+                renderProducts();
+            }, err => {
+                console.error('Product load failed, using defaults', err);
+                products = DEFAULT_PRODUCTS;
+                renderProducts();
+            });
+        }
+
+        function renderProducts() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            const selectedCategory = categoryFilter.value.toLowerCase();
+
+            const filteredProducts = products.filter(item => {
+                const itemCategory = (item.category || '').toLowerCase();
+                const matchesSearch = item.name.toLowerCase().includes(searchTerm) || itemCategory.includes(searchTerm);
+                const matchesCategory = selectedCategory === 'all' || itemCategory === selectedCategory;
+                return matchesSearch && matchesCategory;
+            });
+
+            resultsCount.innerText = `Showing ${filteredProducts.length} item(s)`;
+
+            if (filteredProducts.length === 0) {
+                productGrid.innerHTML = `
+            <div class="no-results">
+                <i class="fa-solid fa-box-open"></i>
+                <h3>No items found</h3>
+                <p>Try searching for another keyword or select a different category.</p>
+            </div>
+        `;
+                return;
+            }
+
+            productGrid.innerHTML = filteredProducts.map(item => `
+        <div class="product-card">
+            <div>
+                <div class="product-card-img-wrapper">
+                    <img src="${item.imgUrl}" alt="${item.name}">
+                </div>
+                <div class="product-category-tag">${item.category || 'General'}</div>
+                <div class="product-name">${item.name}</div>
+            </div>
+            <div>
+                <div class="product-price">${formatNaira(item.price)}</div>
+                <button class="add-cart-btn" onclick="addToCart('${item.id}')">Add to Cart</button>
+            </div>
+        </div>
+    `).join('');
+        }
+
+        searchInput.addEventListener('input', renderProducts);
+        categoryFilter.addEventListener('change', renderProducts);
+
+        function addToCart(id) {
+            const existingIndex = cart.findIndex(item => item.id === id);
+            if (existingIndex > -1) {
+                cart[existingIndex].quantity = (cart[existingIndex].quantity || 1) + 1;
+            } else {
+                const item = products.find(p => p.id === id);
+                if (!item) return;
+                cart.push({ ...item, quantity: 1 });
+            }
+            saveCartAndUpdate();
+            openCart();
+        }
+
+        function updateQuantity(id, delta) {
+            const index = cart.findIndex(item => item.id === id);
+            if (index > -1) {
+                cart[index].quantity = (cart[index].quantity || 1) + delta;
+                if (cart[index].quantity <= 0) cart.splice(index, 1);
+                saveCartAndUpdate();
+            }
+        }
+
+        function removeFromCart(id) {
+            const index = cart.findIndex(item => item.id === id);
+            if (index > -1) { cart.splice(index, 1); saveCartAndUpdate(); }
+        }
+
+        function saveCartAndUpdate() {
+            localStorage.setItem('elobenze_cart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const totalCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+            cartBadge.innerText = totalCount;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p style="text-align: center; color: var(--text-muted); margin-top: 2rem;">Your cart is empty.</p>';
+                cartTotalAmount.innerText = '₦0.00';
+                return;
+            }
+
+            cartItemsContainer.innerHTML = cart.map((item) => `
+                <div class="cart-item">
+                    <img src="${item.imgUrl}" alt="${item.name}" class="cart-item-img">
+                    <div class="cart-item-details">
+                        <div class="cart-item-title">${item.name}</div>
+                        <div class="cart-item-price">${formatNaira(item.price * (item.quantity || 1))}</div>
+                        <div class="qty-controls">
+                            <button class="qty-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
+                            <span class="qty-val">${item.quantity || 1}</span>
+                            <button class="qty-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
+                        </div>
+                    </div>
+                    <button class="remove-btn" onclick="removeFromCart('${item.id}')">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+
+            const total = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+            cartTotalAmount.innerText = formatNaira(total);
+        }
+
+        function openCart() { cartSidebar.classList.add('active'); cartOverlay.classList.add('active'); }
+        function closeCart() { cartSidebar.classList.remove('active'); cartOverlay.classList.remove('active'); }
+
+        cartBtn.addEventListener('click', openCart);
+        closeCartBtn.addEventListener('click', closeCart);
+        cartOverlay.addEventListener('click', closeCart);
+
+        checkoutBtn.addEventListener('click', async () => {
+            if (cart.length === 0) { alert("Your cart is empty."); return; }
+            const total = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+            const order = {
+                name: (currentUser && currentUser.email) || 'Client',
+                userId: currentUser ? currentUser.uid : null,
+                items: cart,
+                total,
+                date: new Date().toISOString()
+            };
+            try {
+                showLoader('Placing order...');
+                const docRef = await fbDb.collection('orders').add(order);
+                alert(`Order placed successfully! Reference: ${docRef.id}`);
+            } catch (err) {
+                console.error(err);
+                const localOrders = JSON.parse(localStorage.getItem('elobenze_orders') || '[]');
+                localOrders.push(order);
+                localStorage.setItem('elobenze_orders', JSON.stringify(localOrders));
+                alert('Order saved locally. We will sync when connection is available.');
+            } finally {
+                hideLoader();
+                cart = [];
+                saveCartAndUpdate();
+                closeCart();
+            }
+        });
+
+        updateCartUI();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELOBENZE KIDDIES WEARS | KIDS FASHION & LIFESTYLE</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" href="/image/Elobenze kiddies.jpeg" type="image/x-icon">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================
+           1. COLOR PALETTE & RESET
+           ========================================== */
+        :root {
+            --bg-main: #0a0a0a;
+            --bg-card: #141414;
+            --bg-alt: #1e1e1e;
+            --gold-main: #d4af37;
+            --gold-bright: #f9e282;
+            --gold-gradient: linear-gradient(135deg, #b8860b, #ffd700, #d4af37, #aa771c);
+            --text-light: #ffffff;
+            --text-muted: #a5a5a5;
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-light);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            display: none;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* ==========================================
+           4. NAVIGATION BAR
+           ========================================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 65px;
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            z-index: 9999;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .navbar {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo { display: flex; align-items: center; gap: 12px; }
+        .brand-logo img { height: 42px; }
+
+        .brand-title {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gold-bright);
+            letter-spacing: 2px;
+        }
+
+        .nav-menu { display: flex; gap: 2rem; list-style: none; }
+
+        .nav-menu a {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover { color: var(--gold-bright); }
+
+        .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+
+        .user-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: var(--gold-bright);
+            background: rgba(212, 175, 55, 0.1);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+
+        .logout-btn:hover { color: #ff5555; }
+
+        .cart-icon-btn {
+            position: relative;
+            background: none;
+            border: none;
+            color: var(--gold-bright);
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 0.4rem;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -2px;
+            right: -4px;
+            background: var(--gold-main);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: bold;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-toggle { display: none; font-size: 1.4rem; color: var(--gold-bright); cursor: pointer; }
+
+        /* ==========================================
+           5. HERO SECTION
+           ========================================== */
+        .hero-banner {
+            margin-top: 65px;
+            min-height: 80vh;
+            background: linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.95)),
+                radial-gradient(circle at center, #2e240e 0%, #0a0a0a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 1.5rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .hero-content { max-width: 800px; }
+
+        .hero-content img {
+            max-width: 140px;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.3));
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            color: var(--gold-bright);
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        /* ==========================================
+           6. CATEGORIES SECTION
+           ========================================== */
+        .section-container { max-width: 1280px; margin: 5rem auto; padding: 0 1.5rem; }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--gold-main);
+            text-align: center;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 3rem; }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 8px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .category-card i { font-size: 2.5rem; color: var(--gold-main); margin-bottom: 1rem; }
+        .category-card h3 { font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 0.5rem; }
+
+        .category-card:hover {
+            border-color: var(--gold-bright);
+            transform: translateY(-5px);
+            background: var(--bg-alt);
+        }
+
+        /* ==========================================
+           7. PRODUCT CATALOG
+           ========================================== */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 8px;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            border-color: var(--gold-bright);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+        }
+
+        .product-card-img-wrapper {
+            height: 220px;
+            background: var(--bg-alt);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .product-card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .product-card:hover .product-card-img-wrapper img { transform: scale(1.05); }
+
+        .product-name { font-family: var(--font-heading); font-size: 1.05rem; margin-bottom: 0.4rem; }
+        .product-price { color: var(--gold-bright); font-weight: 700; font-size: 1.15rem; margin-bottom: 1rem; }
+
+        .add-cart-btn {
+            background: transparent;
+            color: var(--gold-main);
+            border: 1px solid var(--gold-main);
+            padding: 0.7rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .add-cart-btn:hover { background: var(--gold-main); color: #000; }
+
+        /* ==========================================
+           8. VALUE PROPOSITION / FEATURES
+           ========================================== */
+        .features-section {
+            background: var(--bg-card);
+            border-top: 1px solid rgba(212, 175, 55, 0.15);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            padding: 4rem 1.5rem;
+        }
+
+        .features-grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            text-align: center;
+        }
+
+        .feature-box i { font-size: 2.2rem; color: var(--gold-bright); margin-bottom: 1rem; }
+        .feature-box h4 { font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .feature-box p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; }
+
+        /* ==========================================
+           9. TESTIMONIALS & NEWSLETTER
+           ========================================== */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .review-card {
+            background: var(--bg-alt);
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--gold-main);
+        }
+
+        .review-stars { color: var(--gold-bright); margin-bottom: 0.8rem; font-size: 0.85rem; }
+        .review-card p { font-size: 0.9rem; color: var(--text-muted); font-style: italic; margin-bottom: 1rem; }
+        .review-author { font-weight: 600; color: var(--text-light); font-size: 0.85rem; }
+
+        .newsletter-section {
+            background: linear-gradient(135deg, #1f1807 0%, #0a0a0a 100%);
+            border: 1px solid var(--gold-main);
+            border-radius: 12px;
+            padding: 3.5rem 2rem;
+            text-align: center;
+            max-width: 900px;
+            margin: 5rem auto;
+        }
+
+        .newsletter-section h3 { font-family: var(--font-heading); font-size: 1.8rem; color: var(--gold-bright); margin-bottom: 0.5rem; }
+
+        .newsletter-form { display: flex; gap: 10px; max-width: 500px; margin: 1.8rem auto 0; }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border-radius: 6px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: var(--bg-main);
+            color: var(--text-light);
+            outline: none;
+        }
+
+        .btn-gold {
+            width: 100%;
+            background: var(--gold-gradient);
+            color: #000;
+            border: none;
+            padding: 0.9rem;
+            font-family: var(--font-body);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
+
+        .btn-outline-gold {
+            width: 100%;
+            background: transparent;
+            color: var(--gold-bright);
+            border: 1px solid var(--gold-main);
+            padding: 0.7rem;
+            font-family: var(--font-body);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn-outline-gold:hover { background: rgba(212, 175, 55, 0.15); }
+
+        /* ==========================================
+           10. CART & CHECKOUT SLIDE-OUT PANEL
+           ========================================== */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .cart-overlay.active { opacity: 1; visibility: visible; }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 440px;
+            height: 100dvh;
+            background: var(--bg-card);
+            border-left: 1px solid var(--gold-main);
+            z-index: 100000;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.3s ease;
+            overflow: hidden;
+        }
+
+        .cart-sidebar.active { right: 0; }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding-bottom: 1rem;
+        }
+
+        .cart-header h3 { font-family: var(--font-heading); color: var(--gold-bright); display: flex; align-items: center; gap: 10px; }
+        .close-cart-btn { background: none; border: none; color: var(--text-light); font-size: 1.5rem; cursor: pointer; }
+
+        .cart-view-container { flex: 1; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+        .cart-items { flex: 1; min-height: 0; overflow-y: auto; margin: 1.2rem 0; padding-right: 5px; }
+
+        .cart-item {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            background: var(--bg-alt);
+            padding: 0.8rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.8rem;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .cart-item-img { width: 60px; height: 60px; border-radius: 4px; object-fit: cover; border: 1px solid rgba(212, 175, 55, 0.2); }
+        .cart-item-details { flex: 1; }
+        .cart-item-title { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; }
+        .cart-item-price { color: var(--gold-bright); font-size: 0.85rem; font-weight: 600; }
+        .qty-controls { display: flex; align-items: center; gap: 6px; margin-top: 0.4rem; }
+
+        .qty-btn {
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid var(--gold-main);
+            color: var(--gold-bright);
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .qty-btn:hover { background: var(--gold-main); color: #000; }
+        .qty-val { font-size: 0.85rem; font-weight: 600; min-width: 18px; text-align: center; }
+        .remove-btn { background: none; border: none; color: #ff5555; cursor: pointer; padding: 0.3rem; font-size: 0.9rem; }
+
+        .cart-footer { flex-shrink: 0; border-top: 1px solid rgba(212, 175, 55, 0.2); padding-top: 1rem; background: var(--bg-card); }
+        .cart-total { display: flex; justify-content: space-between; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; }
+
+        .checkout-view { display: none; flex-direction: column; flex: 1; min-height: 0; overflow-y: auto; margin-top: 1rem; padding-right: 5px; }
+        .checkout-view.active { display: flex; }
+
+        .bank-details-box { background: var(--bg-alt); border: 1px solid var(--gold-main); border-radius: 8px; padding: 1rem; margin-bottom: 1.2rem; }
+        .bank-details-box h4 { color: var(--gold-bright); font-size: 0.9rem; margin-bottom: 0.6rem; font-family: var(--font-heading); display: flex; align-items: center; gap: 6px; }
+
+        .bank-info-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            margin-bottom: 0.4rem;
+            border-bottom: 1px dashed rgba(212, 175, 55, 0.15);
+            padding-bottom: 0.3rem;
+        }
+
+        .bank-info-row span:first-child { color: var(--text-muted); }
+        .bank-info-row span:last-child { color: var(--text-light); font-weight: 600; }
+
+        .copy-btn {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--gold-bright);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .order-summary-box { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 6px; padding: 0.8rem; margin-bottom: 1.2rem; }
+        .order-summary-box h5 { color: var(--gold-main); font-size: 0.8rem; margin-bottom: 0.5rem; text-transform: uppercase; }
+        .order-summary-list { max-height: 100px; overflow-y: auto; font-size: 0.75rem; color: var(--text-muted); }
+        .summary-item { display: flex; justify-content: space-between; margin-bottom: 0.3rem; }
+
+        .file-upload-wrapper { margin-bottom: 1rem; }
+        .file-upload-wrapper label { display: block; font-size: 0.75rem; color: var(--gold-bright); margin-bottom: 0.3rem; }
+        .file-upload-wrapper input[type="file"] { padding: 0.5rem; font-size: 0.75rem; }
+
+        .auth-form .input-group, .checkout-form .input-group { margin-bottom: 1rem; position: relative; }
+
+        .checkout-form input, .checkout-form textarea {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            background: var(--bg-main);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 6px;
+            color: var(--text-light);
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .checkout-form textarea { padding-left: 1rem; resize: vertical; min-height: 60px; }
+        .checkout-form input:focus, .checkout-form textarea:focus { border-color: var(--gold-bright); box-shadow: 0 0 8px rgba(212, 175, 55, 0.4); }
+        .checkout-form .input-group i { position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%); color: var(--gold-main); font-size: 0.9rem; }
+
+        /* ==========================================
+           11. FOOTER
+           ========================================== */
+        footer { background: var(--bg-card); border-top: 1px solid rgba(212, 175, 55, 0.2); padding: 4rem 1.5rem 2rem; }
+
+        .footer-grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h4 { font-family: var(--font-heading); color: var(--gold-main); margin-bottom: 1.2rem; font-size: 1.05rem; }
+        .footer-col p, .footer-col li { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.6rem; list-style: none; }
+        .footer-col a:hover { color: var(--gold-bright); }
+        .footer-bottom { text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 1.5rem; color: var(--text-muted); font-size: 0.8rem; }
+
+        /* Full-page loader shown while we check auth / fetch data */
+        #globalLoader {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-main);
+            z-index: 100000;
+        }
+
+        #globalLoader .loader {
+            background: var(--bg-card);
+            padding: 16px 18px;
+            border-radius: 8px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            color: var(--text-light);
+            border: 1px solid rgba(212, 175, 55, 0.12);
+        }
+
+        #globalLoader .spinner {
+            width: 26px;
+            height: 26px;
+            border: 4px solid rgba(255, 255, 255, 0.12);
+            border-top-color: var(--gold-bright);
+            border-radius: 50%;
+            animation: spin .9s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ==========================================
+           12. RESPONSIVENESS
+           ========================================== */
+        @media (max-width: 850px) {
+            .nav-menu {
+                position: absolute;
+                top: 65px;
+                left: 0;
+                width: 100%;
+                background: var(--bg-card);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                gap: 1.5rem;
+                display: none;
+                border-bottom: 1px solid var(--gold-main);
+            }
+
+            .nav-menu.active { display: flex; }
+            .mobile-toggle { display: block; }
+            .hero-content h1 { font-size: 2rem; }
+            .newsletter-form { flex-direction: column; }
+        }
+
+        @media (max-width: 500px) {
+            .cart-sidebar { max-width: 100%; padding: 1.2rem; }
+        }
+    </style>
+
+    <!-- Firebase client SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCpkKNfN-TUmDXsrZirXx0cmKVij37ayS4",
+            authDomain: "elobenze-ventures.firebaseapp.com",
+            projectId: "elobenze-ventures",
+            storageBucket: "elobenze-ventures.firebasestorage.app",
+            messagingSenderId: "52764302594",
+            appId: "1:52764302594:web:f8cfcb21d9e740b676761b",
+            measurementId: "G-9JKFVB1GW8"
+        };
+
+        if (!window.firebase || !firebase.apps?.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+
+        const fbAuth = firebase.auth();
+        const fbDb = firebase.firestore();
+    </script>
+</head>
+
+<body>
+
+    <div id="globalLoader">
+        <div class="loader"><div class="spinner"></div><div class="loader-text">Loading storefront...</div></div>
+    </div>
+
+    <header>
+        <nav class="navbar">
+            <div class="brand-logo">
+                <img id="brandLogoImg" src="/image/Elobenze kiddies.jpeg" alt="Elobenze Ventures Logo">
+                <span class="brand-title">ELOBENZE</span>
+            </div>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="/collection.html">Collection</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+            </ul>
+
+            <div class="nav-right">
+                <div class="user-pill" id="userPill">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span id="displayUser">Client</span>
+                    <button class="logout-btn" id="logoutBtn" title="Sign Out">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </button>
+                </div>
+
+                <button class="cart-icon-btn" id="cartBtn" aria-label="Shopping Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
+
+                <i class="fa-solid fa-bars mobile-toggle" id="menuToggle"></i>
+            </div>
+        </nav>
+    </header>
+
+    <div class="site-content" id="siteContent">
+
+        <section class="hero-banner" id="home">
+            <div class="hero-content">
+                <img id="heroLogoImg" src="/image/Elobenze kiddies.jpeg" alt="Elobenze Emblem">
+                <h1 id="heroTitleText">ELOBENZE KIDDIES WEARS</h1>
+                <p id="heroSubtitleText">Discover stylish, comfortable, and quality clothing made for little ones. From everyday essentials to
+                    special-occasion outfits, find the perfect look for every child.</p>
+                <a href="#catalog" class="btn-gold" style="width: auto; padding: 0.9rem 2.5rem;">Explore Catalog</a>
+            </div>
+        </section>
+
+        <section class="section-container" id="categories">
+            <h2 class="section-title">Curated Categories</h2>
+            <p class="section-subtitle">Discover tailored sophistication for every occasion</p>
+
+            <div class="categories-grid">
+                <div class="category-card">
+                    <i class="fa-solid fa-clock"></i>
+                    <h3>Timepieces</h3>
+                    <p style="color: var(--text-muted); font-size: 0.8rem;">Swiss & Custom Gold Watches</p>
+                </div>
+                <div class="category-card">
+                    <i class="fa-solid fa-gem"></i>
+                    <h3>Fine Jewelry</h3>
+                    <p style="color: var(--text-muted); font-size: 0.8rem;">Rings, Chains & Pendants</p>
+                </div>
+                <div class="category-card">
+                    <i class="fa-solid fa-wallet"></i>
+                    <h3>Leather Goods</h3>
+                    <p style="color: var(--text-muted); font-size: 0.8rem;">Wallets, Belts & Handbags</p>
+                </div>
+                <div class="category-card">
+                    <i class="fa-solid fa-glasses"></i>
+                    <h3>Eyewear</h3>
+                    <p style="color: var(--text-muted); font-size: 0.8rem;">Exclusive Designer Frames</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-container" id="catalog">
+            <h2 class="section-title">Featured Products</h2>
+            <p class="section-subtitle">Handpicked items ready for nationwide delivery</p>
+
+            <div class="product-grid" id="productGrid">
+            </div>
+        </section>
+
+        <section class="features-section" id="why-us">
+            <div class="features-grid">
+                <div class="feature-box">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <h4>100% Authenticity Guaranteed</h4>
+                    <p>Every piece in our inventory is thoroughly inspected for purity, craftsmanship, and quality.</p>
+                </div>
+                <div class="feature-box">
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <h4>Express Nationwide Delivery</h4>
+                    <p>Fast, tracked, and insured shipping directly to your doorstep anywhere across Nigeria.</p>
+                </div>
+                <div class="feature-box">
+                    <i class="fa-solid fa-headset"></i>
+                    <h4>24/7 VIP Concierge</h4>
+                    <p>Dedicated customer care specialists available to assist with custom orders and sizing.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-container" id="reviews">
+            <h2 class="section-title">Client Testimonials</h2>
+            <p class="section-subtitle">What our distinguished customers say</p>
+
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i>
+                    </div>
+                    <p>"Elobenze delivered my Gold Chronograph Watch within 24 hours in Lagos. Phenomenal service!"</p>
+                    <div class="review-author">— Chief O. Adeleke</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i>
+                    </div>
+                    <p>"The packaging and quality of the leather goods are unmatched. Truly a premium experience."</p>
+                    <div class="review-author">— Dr. Amina Bello</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-container">
+            <div class="newsletter-section">
+                <h3>JOIN THE ELOBENZE VIP CLUB</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Subscribe to get private drops, discounts, and
+                    exclusive previews.</p>
+                <form class="newsletter-form"
+                    onsubmit="event.preventDefault(); alert('Subscribed to VIP Privileges!');">
+                    <input type="email" placeholder="Enter your email address..." required>
+                    <button type="submit" class="btn-gold"
+                        style="width: auto; padding: 0.8rem 1.8rem;">Subscribe</button>
+                </form>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>ELOBENZE VENTURES</h4>
+                    <p>Delivering authentic luxury and elegance across Nigeria.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="/collection.html">Collection</a></li>
+                        <li><a href="#why-us">Why Choose Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <p><i class="fa-solid fa-envelope" style="color: var(--gold-main);"></i> elobenzewears2@gmail.com
+                    </p>
+                    <p><i class="fa-solid fa-phone" style="color: var(--gold-main);"></i> +234 803 805 336 3</p>
+                    <p><i class="fa-solid fa-location-dot" style="color: var(--gold-main);"></i> shop2,annyplaza 8/10
+                        obun eko street, Eyin eyo bus stop, idumota, lagos island, Nigeria</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ELOBENZE VENTURES. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-sidebar" id="cartSidebar">
+
+        <div class="cart-view-container" id="cartView">
+            <div class="cart-header">
+                <h3><i class="fa-solid fa-bag-shopping"></i> Shopping Bag</h3>
+                <button class="close-cart-btn" id="closeCartBtn">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItemsContainer"></div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span id="cartTotalAmount">₦0.00</span>
+                </div>
+                <button class="btn-gold" id="proceedCheckoutBtn">Proceed to Checkout</button>
+            </div>
+        </div>
+
+        <div class="checkout-view" id="checkoutView">
+            <div class="cart-header">
+                <h3><i class="fa-solid fa-credit-card"></i> Payment & Order</h3>
+                <button class="close-cart-btn" id="closeCheckoutBtn">&times;</button>
+            </div>
+
+            <div style="margin-top: 1rem;">
+                <button class="btn-outline-gold" id="backToCartBtn"
+                    style="margin-bottom: 1rem; font-size: 0.75rem; padding: 0.4rem;">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Shopping Bag
+                </button>
+
+                <div class="order-summary-box">
+                    <h5>Order Summary</h5>
+                    <div class="order-summary-list" id="summaryList"></div>
+                    <div
+                        style="border-top: 1px solid rgba(212,175,55,0.2); margin-top: 0.5rem; padding-top: 0.4rem; display: flex; justify-content: space-between; font-weight: bold; color: var(--gold-bright);">
+                        <span>Total Payable:</span>
+                        <span id="summaryTotal">₦0.00</span>
+                    </div>
+                </div>
+
+                <div class="bank-details-box">
+                    <h4><i class="fa-solid fa-building-columns"></i> Bank Transfer Payment</h4>
+                    <div class="bank-info-row">
+                        <span>Bank Name:</span>
+                        <span>Providus bank</span>
+                    </div>
+                    <div class="bank-info-row">
+                        <span>Account Name:</span>
+                        <span>AMPLE MERCY</span>
+                    </div>
+                    <div class="bank-info-row">
+                        <span>Account Number:</span>
+                        <span>5401472106 <button class="copy-btn"
+                                onclick="copyAccount('0123456789')">Copy</button></span>
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 0.7rem; margin-top: 0.5rem; font-style: italic;">
+                        Please transfer the exact total amount to the account above and upload proof of payment below.
+                    </p>
+                </div>
+
+                <form class="checkout-form" id="checkoutForm">
+                    <div class="input-group">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="custName" placeholder="Full Name" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-phone"></i>
+                        <input type="tel" id="custPhone" placeholder="Phone Number" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-truck"></i>
+                        <textarea id="custAddress" placeholder="Delivery Address & City" required></textarea>
+                    </div>
+
+                    <div class="file-upload-wrapper">
+                        <label><i class="fa-solid fa-file-invoice"></i> Upload Payment Receipt / Proof</label>
+                        <input type="file" id="paymentProof" accept="image/*">
+                    </div>
+
+                    <button type="submit" class="btn-gold" id="placeOrderBtn" style="margin-top: 0.5rem;">
+                        Confirm & Place Order
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </aside>
+
+    <script>
+        function showLoader(msg) {
+            const el = document.getElementById('globalLoader');
+            if (el) { el.querySelector('.loader-text').innerText = msg || 'Please wait...'; el.style.display = 'flex'; }
+        }
+        function hideLoader() {
+            const el = document.getElementById('globalLoader');
+            if (el) el.style.display = 'none';
+        }
+
+        // Fallback catalog shown only if Firestore has no products yet
+        // (e.g. brand new project before the admin has added anything).
+        const DEFAULT_PRODUCTS = [
+            { id: 'default-1', name: "Gold Chronograph Watch", price: 450000, category: "Boys", page: "landing", imgUrl: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500&auto=format&fit=crop&q=60" },
+            { id: 'default-2', name: "Luxury Leather Wallet", price: 120000, category: "Girls", page: "landing", imgUrl: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=500&auto=format&fit=crop&q=60" },
+            { id: 'default-3', name: "Royal Signet Ring", price: 280000, category: "Boys", page: "landing", imgUrl: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500&auto=format&fit=crop&q=60" }
+        ];
+
+        let products = [];
+        let currentUser = null;
+        let cart = JSON.parse(localStorage.getItem('elobenze_cart')) || [];
+
+        const displayUser = document.getElementById('displayUser');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const productGrid = document.getElementById('productGrid');
+
+        const cartBtn = document.getElementById('cartBtn');
+        const closeCartBtn = document.getElementById('closeCartBtn');
+        const closeCheckoutBtn = document.getElementById('closeCheckoutBtn');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const cartItemsContainer = document.getElementById('cartItemsContainer');
+        const cartBadge = document.getElementById('cartBadge');
+        const cartTotalAmount = document.getElementById('cartTotalAmount');
+        const proceedCheckoutBtn = document.getElementById('proceedCheckoutBtn');
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        const cartView = document.getElementById('cartView');
+        const checkoutView = document.getElementById('checkoutView');
+        const backToCartBtn = document.getElementById('backToCartBtn');
+        const summaryList = document.getElementById('summaryList');
+        const summaryTotal = document.getElementById('summaryTotal');
+        const checkoutForm = document.getElementById('checkoutForm');
+        const custName = document.getElementById('custName');
+
+        function formatNaira(amount) {
+            return '₦' + Number(amount).toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        // ---- AUTH: single source of truth is Firebase, not localStorage ----
+        fbAuth.onAuthStateChanged(user => {
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+            currentUser = user;
+            localStorage.setItem('elobenze_user', user.email || '');
+            displayUser.innerText = user.email || 'Client';
+            custName.value = user.email || '';
+            document.body.style.display = 'block';
+            hideLoader();
+            loadCms();
+            loadProducts();
+        });
+
+        logoutBtn.addEventListener('click', async () => {
+            showLoader('Signing out...');
+            try { await fbAuth.signOut(); } catch (e) { console.error(e); }
+            localStorage.removeItem('elobenze_user');
+            localStorage.removeItem('elobenze_admin');
+            window.location.href = 'login.html';
+        });
+
+        // ---- CMS: hero title/subtitle/logo come from Firestore ----
+        function loadCms() {
+            fbDb.collection('cms').doc('config').get().then(doc => {
+                if (!doc.exists) return;
+                const cfg = doc.data();
+                if (cfg.heroTitle) document.getElementById('heroTitleText').innerText = cfg.heroTitle;
+                if (cfg.heroSubtitle) document.getElementById('heroSubtitleText').innerText = cfg.heroSubtitle;
+                if (cfg.heroLogoUrl) {
+                    document.getElementById('heroLogoImg').src = cfg.heroLogoUrl;
+                    document.getElementById('brandLogoImg').src = cfg.heroLogoUrl;
+                }
+            }).catch(err => console.error('CMS load failed', err));
+        }
+
+        // ---- PRODUCTS: live from Firestore so admin edits show up here ----
+        function loadProducts() {
+            fbDb.collection('products').onSnapshot(snapshot => {
+                const items = [];
+                snapshot.forEach(doc => items.push({ id: doc.id, ...doc.data() }));
+                const landingItems = items.filter(p => p.page === 'landing' || p.page === 'both' || !p.page);
+                products = landingItems.length > 0 ? landingItems : DEFAULT_PRODUCTS;
+                renderProducts();
+            }, err => {
+                console.error('Product load failed, using defaults', err);
+                products = DEFAULT_PRODUCTS;
+                renderProducts();
+            });
+        }
+
+        function renderProducts() {
+            productGrid.innerHTML = products.map(item => `
+                <div class="product-card">
+                    <div class="product-card-img-wrapper">
+                        <img src="${item.imgUrl}" alt="${item.name}">
+                    </div>
+                    <div class="product-name">${item.name}</div>
+                    <div class="product-price">${formatNaira(item.price)}</div>
+                    <button class="add-cart-btn" onclick="addToCart('${item.id}')">Add to Cart</button>
+                </div>
+            `).join('');
+        }
+
+        function addToCart(id) {
+            const existingIndex = cart.findIndex(item => item.id === id);
+            if (existingIndex > -1) {
+                cart[existingIndex].quantity = (cart[existingIndex].quantity || 1) + 1;
+            } else {
+                const item = products.find(p => p.id === id);
+                if (!item) return;
+                cart.push({ ...item, quantity: 1 });
+            }
+            saveCartAndUpdate();
+            openCart();
+        }
+
+        function updateQuantity(id, delta) {
+            const index = cart.findIndex(item => item.id === id);
+            if (index > -1) {
+                cart[index].quantity = (cart[index].quantity || 1) + delta;
+                if (cart[index].quantity <= 0) cart.splice(index, 1);
+                saveCartAndUpdate();
+            }
+        }
+
+        function removeFromCart(id) {
+            const index = cart.findIndex(item => item.id === id);
+            if (index > -1) { cart.splice(index, 1); saveCartAndUpdate(); }
+        }
+
+        function saveCartAndUpdate() {
+            localStorage.setItem('elobenze_cart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const totalCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+            cartBadge.innerText = totalCount;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p style="text-align: center; color: var(--text-muted); margin-top: 2rem;">Your cart is empty.</p>';
+                cartTotalAmount.innerText = '₦0.00';
+                return;
+            }
+
+            cartItemsContainer.innerHTML = cart.map((item) => `
+                <div class="cart-item">
+                    <img src="${item.imgUrl}" alt="${item.name}" class="cart-item-img">
+                    <div class="cart-item-details">
+                        <div class="cart-item-title">${item.name}</div>
+                        <div class="cart-item-price">${formatNaira(item.price * (item.quantity || 1))}</div>
+                        <div class="qty-controls">
+                            <button class="qty-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
+                            <span class="qty-val">${item.quantity || 1}</span>
+                            <button class="qty-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
+                        </div>
+                    </div>
+                    <button class="remove-btn" onclick="removeFromCart('${item.id}')">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+
+            const total = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+            cartTotalAmount.innerText = formatNaira(total);
+        }
+
+        function showCheckout() {
+            if (cart.length === 0) { alert("Your cart is empty! Add items before checking out."); return; }
+            summaryList.innerHTML = cart.map(item => `
+                <div class="summary-item">
+                    <span>${item.quantity || 1}x ${item.name}</span>
+                    <span>${formatNaira(item.price * (item.quantity || 1))}</span>
+                </div>
+            `).join('');
+            const total = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+            summaryTotal.innerText = formatNaira(total);
+            cartView.style.display = 'none';
+            checkoutView.classList.add('active');
+        }
+
+        function showCart() {
+            checkoutView.classList.remove('active');
+            cartView.style.display = 'flex';
+        }
+
+        function copyAccount(accNum) {
+            navigator.clipboard.writeText(accNum);
+            alert("Account number copied: " + accNum);
+        }
+
+        function openCart() { showCart(); cartSidebar.classList.add('active'); cartOverlay.classList.add('active'); }
+        function closeCart() { cartSidebar.classList.remove('active'); cartOverlay.classList.remove('active'); }
+
+        cartBtn.addEventListener('click', openCart);
+        closeCartBtn.addEventListener('click', closeCart);
+        closeCheckoutBtn.addEventListener('click', closeCart);
+        cartOverlay.addEventListener('click', closeCart);
+        proceedCheckoutBtn.addEventListener('click', showCheckout);
+        backToCartBtn.addEventListener('click', showCart);
+
+        menuToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
+
+        checkoutForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (cart.length === 0) { alert("Your cart is empty."); return; }
+
+            const name = custName.value || (currentUser && currentUser.email) || 'Guest';
+            const total = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+
+            const order = {
+                name,
+                phone: document.getElementById('custPhone')?.value || '',
+                address: document.getElementById('custAddress')?.value || '',
+                userId: currentUser ? currentUser.uid : null,
+                items: cart,
+                total,
+                date: new Date().toISOString()
+            };
+
+            (async () => {
+                try {
+                    showLoader('Placing order...');
+                    const docRef = await fbDb.collection('orders').add(order);
+                    alert(`Order Placed Successfully! Reference: ${docRef.id}`);
+                } catch (err) {
+                    console.error('Save order failed, storing locally', err);
+                    const localOrders = JSON.parse(localStorage.getItem('elobenze_orders') || '[]');
+                    localOrders.push(order);
+                    localStorage.setItem('elobenze_orders', JSON.stringify(localOrders));
+                    alert(`Order saved locally. Total: ${formatNaira(total)}. It will sync once the admin panel is online.`);
+                } finally {
+                    hideLoader();
+                    cart = [];
+                    saveCartAndUpdate();
+                    checkoutForm.reset();
+                    closeCart();
+                }
+            })();
+        });
+
+        updateCartUI();
+    </script>
+</body>
+
+</html>

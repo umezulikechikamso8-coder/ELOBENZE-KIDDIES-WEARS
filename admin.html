@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELOBENZE VENTURES | ADMIN CONTROL PANEL</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" href="/image/Elobenze kiddies.jpeg" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-main: #0a0a0a;
+            --bg-card: #141414;
+            --bg-alt: #1e1e1e;
+            --gold-main: #d4af37;
+            --gold-bright: #f9e282;
+            --gold-gradient: linear-gradient(135deg, #b8860b, #ffd700, #d4af37, #aa771c);
+            --text-light: #ffffff;
+            --text-muted: #a5a5a5;
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --danger: #ff4d4d;
+            --success: #2ed573;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-main); color: var(--text-light); font-family: var(--font-body); min-height: 100vh; display: none; }
+        a { text-decoration: none; color: inherit; }
+
+        .sidebar {
+            width: 260px; background: var(--bg-card); border-right: 1px solid rgba(212, 175, 55, 0.2);
+            display: flex; flex-direction: column; position: fixed; height: 100vh; z-index: 100; transition: var(--transition);
+        }
+
+        .sidebar-header { padding: 1.5rem; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(212, 175, 55, 0.15); }
+        .sidebar-header img { height: 40px; }
+        .sidebar-header h2 { font-family: var(--font-heading); font-size: 1.1rem; color: var(--gold-bright); letter-spacing: 1px; }
+
+        .sidebar-menu { list-style: none; padding: 1.5rem 1rem; flex: 1; }
+        .sidebar-menu li { margin-bottom: 0.5rem; }
+
+        .sidebar-menu a {
+            display: flex; align-items: center; gap: 12px; padding: 0.8rem 1rem; border-radius: 6px;
+            font-size: 0.85rem; font-weight: 500; color: var(--text-muted); transition: var(--transition);
+        }
+
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background: rgba(212, 175, 55, 0.1); color: var(--gold-bright); border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .sidebar-menu a i { width: 20px; font-size: 1rem; color: var(--gold-main); }
+
+        .admin-user {
+            padding: 1rem 1.5rem; border-top: 1px solid rgba(212, 175, 55, 0.15);
+            display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem;
+        }
+
+        .main-content { margin-left: 260px; flex: 1; padding: 2rem; width: calc(100% - 260px); }
+
+        .top-bar {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;
+            padding-bottom: 1rem; border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .top-bar h1 { font-family: var(--font-heading); color: var(--gold-bright); font-size: 1.8rem; }
+
+        .btn-gold {
+            background: var(--gold-gradient); color: #000; border: none; padding: 0.7rem 1.5rem;
+            font-family: var(--font-body); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            border-radius: 6px; cursor: pointer; transition: var(--transition);
+            display: inline-flex; align-items: center; gap: 8px; font-size: 0.8rem;
+        }
+
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
+        .btn-gold:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        .btn-danger { background: var(--danger); color: #fff; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; font-size: 0.75rem; transition: var(--transition); }
+        .btn-danger:hover { background: #d32f2f; }
+
+        .btn-edit {
+            background: var(--bg-alt); color: var(--gold-bright); border: 1px solid var(--gold-main);
+            padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; font-size: 0.75rem; margin-right: 5px; transition: var(--transition);
+        }
+
+        .btn-edit:hover { background: var(--gold-main); color: #000; }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
+
+        .stat-card {
+            background: var(--bg-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 8px;
+            padding: 1.5rem; display: flex; align-items: center; gap: 1.2rem;
+        }
+
+        .stat-icon {
+            width: 50px; height: 50px; border-radius: 8px; background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold-main); display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; color: var(--gold-bright);
+        }
+
+        .stat-info h3 { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; }
+        .stat-info p { font-size: 1.4rem; font-weight: 700; color: var(--gold-bright); margin-top: 0.2rem; }
+
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        .panel-card { background: var(--bg-card); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem; }
+
+        .panel-header {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1); padding-bottom: 0.8rem;
+        }
+
+        .panel-header h3 { font-family: var(--font-heading); color: var(--gold-bright); font-size: 1.2rem; }
+
+        .admin-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.85rem; }
+        .admin-table th { background: var(--bg-alt); color: var(--gold-bright); padding: 0.8rem 1rem; border-bottom: 1px solid rgba(212, 175, 55, 0.2); font-weight: 600; }
+        .admin-table td { padding: 0.8rem 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); vertical-align: middle; }
+        .admin-table img { width: 45px; height: 45px; object-fit: cover; border-radius: 4px; border: 1px solid rgba(212, 175, 55, 0.3); }
+
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; }
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+        .form-group label { font-size: 0.8rem; color: var(--gold-bright); font-weight: 500; }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 0.8rem 1rem; background: var(--bg-main); border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 6px; color: var(--text-light); font-family: var(--font-body); font-size: 0.85rem; outline: none;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--gold-bright); box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+        }
+
+        #globalLoader {
+            position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+            background: var(--bg-main); z-index: 100000;
+        }
+
+        #globalLoader .loader {
+            background: var(--bg-card); padding: 16px 18px; border-radius: 8px; display: flex; gap: 12px;
+            align-items: center; color: var(--text-light); border: 1px solid rgba(212, 175, 55, 0.12);
+        }
+
+        #globalLoader .spinner {
+            width: 26px; height: 26px; border: 4px solid rgba(255, 255, 255, 0.12);
+            border-top-color: var(--gold-bright); border-radius: 50%; animation: spin .9s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        @media (max-width: 900px) {
+            .sidebar { width: 70px; }
+            .sidebar-header h2, .sidebar-menu span, .admin-user span { display: none; }
+            .main-content { margin-left: 70px; width: calc(100% - 70px); padding: 1rem; }
+        }
+    </style>
+
+    <!-- Firebase client SDKs, loaded synchronously so the auth guard can run
+         before anything else on the page. -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCpkKNfN-TUmDXsrZirXx0cmKVij37ayS4",
+            authDomain: "elobenze-ventures.firebaseapp.com",
+            projectId: "elobenze-ventures",
+            storageBucket: "elobenze-ventures.firebasestorage.app",
+            messagingSenderId: "52764302594",
+            appId: "1:52764302594:web:f8cfcb21d9e740b676761b",
+            measurementId: "G-9JKFVB1GW8"
+        };
+
+        if (!window.firebase || !firebase.apps?.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+
+        const fbAuth = firebase.auth();
+        const fbDb = firebase.firestore();
+
+        // Must match the ADMIN_EMAIL constant in login.html.
+        const ADMIN_EMAIL = 'elobenzeventures@gmail.com';
+
+        // ---- ADMIN GUARD ----
+        // Checked against the live, verified Firebase session — not just a
+        // localStorage flag, which anyone could set from devtools. Also
+        // checked here (not only on login.html) so someone can't reach
+        // admin.html directly by URL while signed in as a non-admin account.
+        fbAuth.onAuthStateChanged((user) => {
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+            if (user.email !== ADMIN_EMAIL) {
+                console.warn('admin.html access denied - not the admin account');
+                window.location.href = 'index.html';
+                return;
+            }
+            localStorage.setItem('elobenze_admin', 'true');
+            localStorage.setItem('elobenze_user', user.email || '');
+            document.body.style.display = 'flex';
+            document.getElementById('globalLoader').style.display = 'none';
+            if (typeof initAdminApp === 'function') initAdminApp(user);
+        });
+    </script>
+</head>
+
+<body>
+
+    <div id="globalLoader">
+        <div class="loader"><div class="spinner"></div><div class="loader-text">Verifying admin access...</div></div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="/image/Elobenze kiddies.jpeg" alt="Elobenze Logo">
+            <h2>ADMIN PANEL</h2>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li><a href="#" class="active" onclick="switchTab(event, 'dashboardTab')"><i class="fa-solid fa-chart-line"></i><span>Dashboard</span></a></li>
+            <li><a href="#" onclick="switchTab(event, 'productsTab')"><i class="fa-solid fa-box-open"></i><span>Manage Products</span></a></li>
+            <li><a href="#" onclick="switchTab(event, 'landingCMS')"><i class="fa-solid fa-laptop-code"></i><span>Landing Page CMS</span></a></li>
+            <li><a href="#" onclick="switchTab(event, 'collectionCMS')"><i class="fa-solid fa-layer-group"></i><span>Collection Page CMS</span></a></li>
+            <li><a href="#" onclick="switchTab(event, 'messagesTab')"><i class="fa-solid fa-envelope"></i><span>Contact Messages</span></a></li>
+            <li><a href="#" onclick="switchTab(event, 'ordersTab')"><i class="fa-solid fa-receipt"></i><span>Orders</span></a></li>
+        </ul>
+
+        <div class="admin-user">
+            <span><i class="fa-solid fa-user-shield" style="color: var(--gold-main); margin-right: 5px;"></i> <span id="adminEmailLabel">Admin</span></span>
+            <a href="#" id="signOutLink" title="Sign Out" style="color: var(--gold-bright);"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="top-bar">
+            <h1 id="pageTitle">Dashboard Overview</h1>
+            <a href="index.html" target="_blank" class="btn-gold"><i class="fa-solid fa-eye"></i> View Storefront</a>
+        </div>
+
+        <div class="tab-panel active" id="dashboardTab">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+                    <div class="stat-info"><h3>Total Items</h3><p id="statProducts">0</p></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <div class="stat-info"><h3>Messages</h3><p id="statMessages">0</p></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+                    <div class="stat-info"><h3>Active Orders</h3><p id="statOrders">0</p></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-coins"></i></div>
+                    <div class="stat-info"><h3>Inventory Value</h3><p id="statValue">₦0</p></div>
+                </div>
+            </div>
+
+            <div class="panel-card">
+                <div class="panel-header">
+                    <h3>Quick Action: Recently Added Products</h3>
+                    <button class="btn-gold" onclick="switchTab(null, 'productsTab')"><i class="fa-solid fa-plus"></i> Add Product</button>
+                </div>
+                <table class="admin-table">
+                    <thead><tr><th>Image</th><th>Product Name</th><th>Category</th><th>Target Page</th><th>Price</th></tr></thead>
+                    <tbody id="quickProductTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="tab-panel" id="productsTab">
+            <div class="panel-card">
+                <div class="panel-header"><h3 id="productFormTitle">Add New Product</h3></div>
+                <form id="productForm">
+                    <input type="hidden" id="editProductId">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Product Name</label>
+                            <input type="text" id="prodName" placeholder="e.g. Royal Signet Ring" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Price (₦)</label>
+                            <input type="number" id="prodPrice" placeholder="e.g. 250000" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Category (Gender / Kids)</label>
+                            <select id="prodCategory" required>
+                                <option value="Boys">Boys</option>
+                                <option value="Girls">Girls</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Display Location / Page</label>
+                            <select id="prodPage">
+                                <option value="landing">Landing Page Only</option>
+                                <option value="collection">Collection Page Only</option>
+                                <option value="both" selected>Both Landing & Collection</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Image URL or Base64 String</label>
+                        <input type="text" id="prodImage" placeholder="Paste image link or upload below" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Or Upload Product Image File</label>
+                        <input type="file" id="prodFileInput" accept="image/*" onchange="handleFileUpload(event, 'prodImage')">
+                    </div>
+
+                    <button type="submit" class="btn-gold" style="margin-top: 1rem;" id="saveProductBtn"><i class="fa-solid fa-floppy-disk"></i> Save Product</button>
+                </form>
+            </div>
+
+            <div class="panel-card">
+                <div class="panel-header"><h3>Product Inventory Catalog</h3></div>
+                <table class="admin-table">
+                    <thead><tr><th>Image</th><th>Title</th><th>Category</th><th>Price</th><th>Placement</th><th>Actions</th></tr></thead>
+                    <tbody id="inventoryTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="tab-panel" id="landingCMS">
+            <div class="panel-card">
+                <div class="panel-header"><h3>Landing Page Branding & Images</h3></div>
+                <form id="landingCMSForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Hero Title Headline</label>
+                            <input type="text" id="heroTitle" placeholder="ELOBENZE VENTURES">
+                        </div>
+                        <div class="form-group">
+                            <label>Hero Tagline / Subtitle</label>
+                            <input type="text" id="heroSubtitle" placeholder="Discover luxury outfits...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Hero Emblem / Logo Image Link</label>
+                        <input type="text" id="heroLogoUrl">
+                        <input type="file" accept="image/*" style="margin-top: 5px;" onchange="handleFileUpload(event, 'heroLogoUrl')">
+                    </div>
+                    <button type="submit" class="btn-gold" id="saveLandingCmsBtn"><i class="fa-solid fa-check"></i> Update Landing Page Settings</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="tab-panel" id="collectionCMS">
+            <div class="panel-card">
+                <div class="panel-header"><h3>Collection Banner Customization</h3></div>
+                <form id="collectionCMSForm">
+                    <div class="form-group">
+                        <label>Collection Header Title</label>
+                        <input type="text" id="collectionTitle" placeholder="EXCLUSIVE KIDS & LUXURY COLLECTION">
+                    </div>
+                    <div class="form-group">
+                        <label>Collection Banner Image Link</label>
+                        <input type="text" id="collectionBannerUrl">
+                        <input type="file" accept="image/*" style="margin-top: 5px;" onchange="handleFileUpload(event, 'collectionBannerUrl')">
+                    </div>
+                    <button type="submit" class="btn-gold" id="saveCollectionCmsBtn"><i class="fa-solid fa-check"></i> Save Collection Customization</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="tab-panel" id="messagesTab">
+            <div class="panel-card">
+                <div class="panel-header">
+                    <h3>Contact Form Messages</h3>
+                    <button class="btn-danger" onclick="clearAllMessages()">Clear All Messages</button>
+                </div>
+                <table class="admin-table">
+                    <thead><tr><th>Date</th><th>Sender Name</th><th>Email / Contact</th><th>Subject</th><th>Message Content</th><th>Actions</th></tr></thead>
+                    <tbody id="messagesTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="tab-panel" id="ordersTab">
+            <div class="panel-card">
+                <div class="panel-header">
+                    <h3>Customer Orders</h3>
+                    <button class="btn-danger" onclick="clearAllOrders()">Clear Order History</button>
+                </div>
+                <table class="admin-table">
+                    <thead><tr><th>Date</th><th>Customer Name</th><th>Phone</th><th>Items Placed</th><th>Total</th><th>Payment Proof</th></tr></thead>
+                    <tbody id="ordersTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function formatNaira(amount) { return '₦' + Number(amount).toLocaleString('en-NG'); }
+
+        // Local caches populated by Firestore onSnapshot listeners below.
+        let products = [];
+        let orders = [];
+        let messages = [];
+        let cmsConfig = {};
+        let unsubscribers = [];
+
+        function switchTab(e, tabId) {
+            if (e) e.preventDefault();
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+
+            if (e && e.currentTarget) {
+                e.currentTarget.classList.add('active');
+            } else {
+                document.querySelectorAll('.sidebar-menu a').forEach(link => {
+                    if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(tabId)) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            const titleMap = {
+                'dashboardTab': 'Dashboard Overview',
+                'productsTab': 'Product Inventory Manager',
+                'landingCMS': 'Landing Page Content Management',
+                'collectionCMS': 'Collection Page Customization',
+                'messagesTab': 'Contact Form Messages',
+                'ordersTab': 'Customer Order Records'
+            };
+            document.getElementById('pageTitle').innerText = titleMap[tabId] || 'Admin Panel';
+        }
+
+        function handleFileUpload(event, targetInputId) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) { document.getElementById(targetInputId).value = e.target.result; };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function refreshDashboardStats() {
+            document.getElementById('statProducts').innerText = products.length;
+            document.getElementById('statOrders').innerText = orders.length;
+            document.getElementById('statMessages').innerText = messages.length;
+            const totalVal = products.reduce((sum, p) => sum + Number(p.price || 0), 0);
+            document.getElementById('statValue').innerText = formatNaira(totalVal);
+
+            document.getElementById('quickProductTable').innerHTML = products.slice(-3).reverse().map(p => `
+                <tr>
+                    <td><img src="${p.imgUrl}" alt="${p.name}"></td>
+                    <td><strong>${p.name}</strong></td>
+                    <td><span style="color: var(--gold-bright); font-size: 0.75rem;">${p.category || 'Boys'}</span></td>
+                    <td><span style="text-transform: uppercase; font-size: 0.75rem;">${p.page}</span></td>
+                    <td>${formatNaira(p.price)}</td>
+                </tr>
+            `).join('');
+        }
+
+        function renderInventoryTable() {
+            document.getElementById('inventoryTable').innerHTML = products.map(p => `
+                <tr>
+                    <td><img src="${p.imgUrl}" alt="${p.name}"></td>
+                    <td><strong>${p.name}</strong></td>
+                    <td><span style="color: var(--gold-bright);">${p.category || 'Boys'}</span></td>
+                    <td>${formatNaira(p.price)}</td>
+                    <td><span style="text-transform: capitalize;">${p.page}</span></td>
+                    <td>
+                        <button class="btn-edit" onclick="editProduct('${p.id}')"><i class="fa-solid fa-pen"></i></button>
+                        <button class="btn-danger" onclick="deleteProduct('${p.id}')"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderMessagesTable() {
+            document.getElementById('messagesTable').innerHTML = messages.length ? messages.map((m) => `
+                <tr>
+                    <td>${m.date || 'N/A'}</td>
+                    <td><strong>${m.name || 'Anonymous'}</strong></td>
+                    <td>${m.email || 'N/A'}</td>
+                    <td>${m.subject || 'General Inquiry'}</td>
+                    <td style="max-width: 250px;">${m.message || ''}</td>
+                    <td><button class="btn-danger" onclick="deleteMessage('${m.id}')"><i class="fa-solid fa-trash"></i></button></td>
+                </tr>
+            `).join('') : '<tr><td colspan="6" style="text-align:center; color: var(--text-muted);">No messages received yet.</td></tr>';
+        }
+
+        function renderOrdersTable() {
+            document.getElementById('ordersTable').innerHTML = orders.length ? orders.map(o => `
+                <tr>
+                    <td>${o.date ? new Date(o.date).toLocaleString('en-NG') : 'N/A'}</td>
+                    <td><strong>${o.name}</strong></td>
+                    <td>${o.phone || 'N/A'}</td>
+                    <td>${(o.items || []).map(i => `${i.quantity || 1}x ${i.name}`).join(', ')}</td>
+                    <td><strong>${formatNaira(o.total)}</strong></td>
+                    <td>${o.proof ? `<a href="${o.proof}" target="_blank" style="color:var(--gold-bright); text-decoration:underline;">View Receipt</a>` : 'None'}</td>
+                </tr>
+            `).join('') : '<tr><td colspan="6" style="text-align:center; color: var(--text-muted);">No orders recorded yet.</td></tr>';
+        }
+
+        function populateCmsForms() {
+            document.getElementById('heroTitle').value = cmsConfig.heroTitle || '';
+            document.getElementById('heroSubtitle').value = cmsConfig.heroSubtitle || '';
+            document.getElementById('heroLogoUrl').value = cmsConfig.heroLogoUrl || '';
+            document.getElementById('collectionTitle').value = cmsConfig.collectionTitle || '';
+            document.getElementById('collectionBannerUrl').value = cmsConfig.collectionBannerUrl || '';
+        }
+
+        // ---- Called once the auth guard (in <head>) confirms this is an admin ----
+        function initAdminApp(user) {
+            document.getElementById('adminEmailLabel').innerText = user.email || 'Admin';
+
+            document.getElementById('signOutLink').addEventListener('click', async (e) => {
+                e.preventDefault();
+                unsubscribers.forEach(unsub => { try { unsub(); } catch (err) {} });
+                try { await fbAuth.signOut(); } catch (err) { console.error(err); }
+                localStorage.removeItem('elobenze_admin');
+                localStorage.removeItem('elobenze_user');
+                window.location.href = 'login.html';
+            });
+
+            // Live product list
+            unsubscribers.push(fbDb.collection('products').onSnapshot(snapshot => {
+                products = [];
+                snapshot.forEach(doc => products.push({ id: doc.id, ...doc.data() }));
+                refreshDashboardStats();
+                renderInventoryTable();
+            }, err => console.error('Products listener failed', err)));
+
+            // Live orders list (most recent 100)
+            unsubscribers.push(fbDb.collection('orders').orderBy('date', 'desc').limit(100).onSnapshot(snapshot => {
+                orders = [];
+                snapshot.forEach(doc => orders.push({ id: doc.id, ...doc.data() }));
+                refreshDashboardStats();
+                renderOrdersTable();
+            }, err => console.error('Orders listener failed', err)));
+
+            // Live contact messages
+            unsubscribers.push(fbDb.collection('messages').orderBy('date', 'desc').limit(100).onSnapshot(snapshot => {
+                messages = [];
+                snapshot.forEach(doc => messages.push({ id: doc.id, ...doc.data() }));
+                refreshDashboardStats();
+                renderMessagesTable();
+            }, err => console.error('Messages listener failed', err)));
+
+            // Live CMS config
+            unsubscribers.push(fbDb.collection('cms').doc('config').onSnapshot(doc => {
+                cmsConfig = doc.exists ? doc.data() : {};
+                populateCmsForms();
+            }, err => console.error('CMS listener failed', err)));
+
+            // ---- Product form ----
+            document.getElementById('productForm').addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const saveBtn = document.getElementById('saveProductBtn');
+                const editId = document.getElementById('editProductId').value;
+                const data = {
+                    name: document.getElementById('prodName').value,
+                    price: Number(document.getElementById('prodPrice').value),
+                    category: document.getElementById('prodCategory').value,
+                    page: document.getElementById('prodPage').value,
+                    imgUrl: document.getElementById('prodImage').value
+                };
+
+                saveBtn.disabled = true;
+                try {
+                    if (editId) {
+                        await fbDb.collection('products').doc(editId).set(data, { merge: true });
+                    } else {
+                        await fbDb.collection('products').add(data);
+                    }
+                    document.getElementById('editProductId').value = '';
+                    document.getElementById('productFormTitle').innerText = 'Add New Product';
+                    this.reset();
+                    alert('Product saved successfully!');
+                } catch (err) {
+                    console.error(err);
+                    alert('Could not save product: ' + err.message);
+                } finally {
+                    saveBtn.disabled = false;
+                }
+            });
+
+            // ---- Landing CMS form ----
+            document.getElementById('landingCMSForm').addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const btn = document.getElementById('saveLandingCmsBtn');
+                btn.disabled = true;
+                try {
+                    await fbDb.collection('cms').doc('config').set({
+                        heroTitle: document.getElementById('heroTitle').value,
+                        heroSubtitle: document.getElementById('heroSubtitle').value,
+                        heroLogoUrl: document.getElementById('heroLogoUrl').value
+                    }, { merge: true });
+                    alert('Landing page customizations updated successfully!');
+                } catch (err) {
+                    console.error(err);
+                    alert('Could not save: ' + err.message);
+                } finally {
+                    btn.disabled = false;
+                }
+            });
+
+            // ---- Collection CMS form ----
+            document.getElementById('collectionCMSForm').addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const btn = document.getElementById('saveCollectionCmsBtn');
+                btn.disabled = true;
+                try {
+                    await fbDb.collection('cms').doc('config').set({
+                        collectionTitle: document.getElementById('collectionTitle').value,
+                        collectionBannerUrl: document.getElementById('collectionBannerUrl').value
+                    }, { merge: true });
+                    alert('Collection page customizations updated successfully!');
+                } catch (err) {
+                    console.error(err);
+                    alert('Could not save: ' + err.message);
+                } finally {
+                    btn.disabled = false;
+                }
+            });
+        }
+
+        // ---- Product row actions ----
+        function editProduct(id) {
+            const p = products.find(item => item.id === id);
+            if (p) {
+                document.getElementById('editProductId').value = p.id;
+                document.getElementById('prodName').value = p.name;
+                document.getElementById('prodPrice').value = p.price;
+                document.getElementById('prodCategory').value = p.category || 'Boys';
+                document.getElementById('prodPage').value = p.page || 'both';
+                document.getElementById('prodImage').value = p.imgUrl;
+                document.getElementById('productFormTitle').innerText = 'Edit Product';
+                switchTab(null, 'productsTab');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        async function deleteProduct(id) {
+            if (!confirm('Are you sure you want to remove this product?')) return;
+            try {
+                await fbDb.collection('products').doc(id).delete();
+            } catch (err) {
+                console.error(err);
+                alert('Could not delete product: ' + err.message);
+            }
+        }
+
+        async function deleteMessage(id) {
+            if (!confirm('Delete this message?')) return;
+            try {
+                await fbDb.collection('messages').doc(id).delete();
+            } catch (err) {
+                console.error(err);
+                alert('Could not delete message: ' + err.message);
+            }
+        }
+
+        async function clearAllMessages() {
+            if (!confirm('Clear all received contact messages?')) return;
+            try {
+                const batch = fbDb.batch();
+                const snapshot = await fbDb.collection('messages').get();
+                snapshot.forEach(doc => batch.delete(doc.ref));
+                await batch.commit();
+            } catch (err) {
+                console.error(err);
+                alert('Could not clear messages: ' + err.message);
+            }
+        }
+
+        async function clearAllOrders() {
+            if (!confirm('Are you sure you want to clear all order history? This only clears orders currently loaded (most recent 100).')) return;
+            try {
+                const batch = fbDb.batch();
+                const snapshot = await fbDb.collection('orders').orderBy('date', 'desc').limit(100).get();
+                snapshot.forEach(doc => batch.delete(doc.ref));
+                await batch.commit();
+            } catch (err) {
+                console.error(err);
+                alert('Could not clear orders: ' + err.message);
+            }
+        }
+    </script>
+</body>
+
+</html>
