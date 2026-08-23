@@ -58,7 +58,7 @@
         .back-home-btn:hover { background: var(--gold-main); color: #000; transform: translateX(-3px); }
 
         .brand-title { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; color: var(--gold-bright); letter-spacing: 2px; }
-        .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+        .nav-right { display: flex; align-items: center; gap: 1.2rem; min-width: 0; }
 
         .user-pill {
             display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--gold-bright);
@@ -140,6 +140,9 @@
         .no-results { text-align: center; grid-column: 1 / -1; padding: 4rem 1rem; color: var(--text-muted); }
         .no-results i { font-size: 3rem; color: var(--gold-main); margin-bottom: 1rem; }
 
+        /* ==========================================
+           CART & CHECKOUT SLIDE-OUT PANEL (parity with index.html)
+           ========================================== */
         .cart-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8);
             z-index: 2000; opacity: 0; visibility: hidden; transition: var(--transition);
@@ -148,17 +151,18 @@
         .cart-overlay.active { opacity: 1; visibility: visible; }
 
         .cart-sidebar {
-            position: fixed; top: 0; right: -100%; width: 100%; max-width: 420px; height: 100dvh;
+            position: fixed; top: 0; right: -100%; width: 100%; max-width: 440px; height: 100dvh;
             background: var(--bg-card); border-left: 1px solid var(--gold-main); z-index: 100000;
-            padding: 1.8rem; display: flex; flex-direction: column; transition: right 0.3s ease; overflow: hidden;
+            padding: 1.5rem; display: flex; flex-direction: column; transition: right 0.3s ease; overflow: hidden;
         }
 
         .cart-sidebar.active { right: 0; }
 
         .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 1rem; }
-        .cart-header h3 { font-family: var(--font-heading); color: var(--gold-bright); }
+        .cart-header h3 { font-family: var(--font-heading); color: var(--gold-bright); display: flex; align-items: center; gap: 10px; }
         .close-cart-btn { background: none; border: none; color: var(--text-light); font-size: 1.5rem; cursor: pointer; }
 
+        .cart-view-container { flex: 1; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
         .cart-items { flex: 1; min-height: 0; overflow-y: auto; margin: 1.2rem 0; padding-right: 5px; }
 
         .cart-item {
@@ -185,6 +189,46 @@
         .cart-footer { flex-shrink: 0; border-top: 1px solid rgba(212, 175, 55, 0.2); padding-top: 1rem; background: var(--bg-card); }
         .cart-total { display: flex; justify-content: space-between; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; }
 
+        .checkout-view { display: none; flex-direction: column; flex: 1; min-height: 0; overflow-y: auto; margin-top: 1rem; padding-right: 5px; }
+        .checkout-view.active { display: flex; }
+
+        .bank-details-box { background: var(--bg-alt); border: 1px solid var(--gold-main); border-radius: 8px; padding: 1rem; margin-bottom: 1.2rem; }
+        .bank-details-box h4 { color: var(--gold-bright); font-size: 0.9rem; margin-bottom: 0.6rem; font-family: var(--font-heading); display: flex; align-items: center; gap: 6px; }
+
+        .bank-info-row {
+            display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.4rem;
+            border-bottom: 1px dashed rgba(212, 175, 55, 0.15); padding-bottom: 0.3rem;
+        }
+
+        .bank-info-row span:first-child { color: var(--text-muted); }
+        .bank-info-row span:last-child { color: var(--text-light); font-weight: 600; }
+
+        .copy-btn {
+            background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); color: var(--gold-bright);
+            padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; cursor: pointer; margin-left: 5px;
+        }
+
+        .order-summary-box { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 6px; padding: 0.8rem; margin-bottom: 1.2rem; }
+        .order-summary-box h5 { color: var(--gold-main); font-size: 0.8rem; margin-bottom: 0.5rem; text-transform: uppercase; }
+        .order-summary-list { max-height: 100px; overflow-y: auto; font-size: 0.75rem; color: var(--text-muted); }
+        .summary-item { display: flex; justify-content: space-between; margin-bottom: 0.3rem; }
+
+        .file-upload-wrapper { margin-bottom: 1rem; }
+        .file-upload-wrapper label { display: block; font-size: 0.75rem; color: var(--gold-bright); margin-bottom: 0.3rem; }
+        .file-upload-wrapper input[type="file"] { padding: 0.5rem; font-size: 0.75rem; }
+
+        .checkout-form .input-group { margin-bottom: 1rem; position: relative; }
+
+        .checkout-form input, .checkout-form textarea {
+            width: 100%; padding: 0.8rem 1rem 0.8rem 2.5rem; background: var(--bg-main);
+            border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 6px; color: var(--text-light);
+            font-family: var(--font-body); font-size: 0.85rem; outline: none; transition: var(--transition);
+        }
+
+        .checkout-form textarea { padding-left: 1rem; resize: vertical; min-height: 60px; }
+        .checkout-form input:focus, .checkout-form textarea:focus { border-color: var(--gold-bright); box-shadow: 0 0 8px rgba(212, 175, 55, 0.4); }
+        .checkout-form .input-group i { position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%); color: var(--gold-main); font-size: 0.9rem; }
+
         .btn-gold {
             width: 100%; background: var(--gold-gradient); color: #000; border: none; padding: 0.9rem;
             font-family: var(--font-body); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
@@ -192,6 +236,14 @@
         }
 
         .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
+
+        .btn-outline-gold {
+            width: 100%; background: transparent; color: var(--gold-bright); border: 1px solid var(--gold-main);
+            padding: 0.7rem; font-family: var(--font-body); font-weight: 600; text-transform: uppercase;
+            letter-spacing: 1px; border-radius: 6px; cursor: pointer; transition: var(--transition); text-align: center;
+        }
+
+        .btn-outline-gold:hover { background: rgba(212, 175, 55, 0.15); }
 
         footer { background: var(--bg-card); border-top: 1px solid rgba(212, 175, 55, 0.2); padding: 3rem 1.5rem 1.5rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
 
@@ -212,70 +264,52 @@
 
         @keyframes spin { to { transform: rotate(360deg); } }
 
+        /* ==========================================
+           RESPONSIVENESS
+           ========================================== */
+        @media (max-width: 850px) {
+            .hero-content h1 { font-size: 2rem; }
+        }
+
         @media (max-width: 600px) {
+            .navbar { padding: 0.7rem 1rem; }
             .collection-hero h1 { font-size: 1.8rem; }
             .search-filter-wrapper { flex-direction: column; }
             .cart-sidebar { max-width: 100%; padding: 1.2rem; }
+
+            .brand-title { font-size: 1rem; letter-spacing: 1px; }
+            .back-home-btn { font-size: 0.8rem; padding: 0.4rem 0.7rem; }
+            .nav-right { gap: 0.6rem; }
+
+            .user-pill {
+                min-width: 0;
+                max-width: 130px;
+                padding: 0.35rem 0.6rem;
+                font-size: 0.72rem;
+            }
+
+            .user-pill #displayUser {
+                max-width: 75px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                display: inline-block;
+            }
+
+            .cart-icon-btn { font-size: 1.15rem; }
         }
-        @media (max-width: 850px) {
-    .nav-menu {
-        position: absolute;
-        top: 65px;
-        left: 0;
-        width: 100%;
-        background: var(--bg-card);
-        flex-direction: column;
-        align-items: center;
-        padding: 2rem 0;
-        gap: 1.5rem;
-        display: none;
-        border-bottom: 1px solid var(--gold-main);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
-    }
 
-    .nav-menu.active { display: flex; }
-    .mobile-toggle { display: block; }
-    .hero-content h1 { font-size: 2rem; }
-    .newsletter-form { flex-direction: column; }
-}
-
-@media (max-width: 600px) {
-    .navbar { padding: 0.7rem 1rem; }
-
-    .brand-logo img { height: 32px; }
-    .brand-title { font-size: 1rem; letter-spacing: 1px; }
-
-    .nav-right { gap: 0.6rem; }
-
-    .user-pill {
-        min-width: 0;
-        max-width: 130px;
-        padding: 0.35rem 0.6rem;
-        font-size: 0.72rem;
-    }
-
-    .user-pill #displayUser {
-        max-width: 75px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        display: inline-block;
-    }
-
-    .cart-icon-btn { font-size: 1.15rem; }
-}
-
-@media (max-width: 380px) {
-    .user-pill #displayUser { display: none; }
-    .user-pill {
-        max-width: 40px;
-        padding: 0.45rem;
-        justify-content: center;
-        gap: 0;
-    }
-    .user-pill .fa-circle-user { font-size: 1rem; }
-    .logout-btn { margin-left: 2px; font-size: 0.75rem; }
-}
+        @media (max-width: 380px) {
+            .user-pill #displayUser { display: none; }
+            .user-pill {
+                max-width: 40px;
+                padding: 0.45rem;
+                justify-content: center;
+                gap: 0;
+            }
+            .user-pill .fa-circle-user { font-size: 1rem; }
+            .back-home-btn span { display: none; }
+        }
     </style>
 
     <!-- Firebase client SDKs -->
@@ -362,19 +396,89 @@
 
     <div class="cart-overlay" id="cartOverlay"></div>
     <aside class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h3>Shopping Bag</h3>
-            <button class="close-cart-btn" id="closeCartBtn">&times;</button>
-        </div>
-        <div class="cart-items" id="cartItemsContainer">
-        </div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span>Total:</span>
-                <span id="cartTotalAmount">₦0.00</span>
+
+        <div class="cart-view-container" id="cartView">
+            <div class="cart-header">
+                <h3><i class="fa-solid fa-bag-shopping"></i> Shopping Bag</h3>
+                <button class="close-cart-btn" id="closeCartBtn">&times;</button>
             </div>
-            <button class="btn-gold" id="checkoutBtn">Place Order</button>
+            <div class="cart-items" id="cartItemsContainer"></div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span id="cartTotalAmount">₦0.00</span>
+                </div>
+                <button class="btn-gold" id="proceedCheckoutBtn">Proceed to Checkout</button>
+            </div>
         </div>
+
+        <div class="checkout-view" id="checkoutView">
+            <div class="cart-header">
+                <h3><i class="fa-solid fa-credit-card"></i> Payment & Order</h3>
+                <button class="close-cart-btn" id="closeCheckoutBtn">&times;</button>
+            </div>
+
+            <div style="margin-top: 1rem;">
+                <button class="btn-outline-gold" id="backToCartBtn"
+                    style="margin-bottom: 1rem; font-size: 0.75rem; padding: 0.4rem;">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Shopping Bag
+                </button>
+
+                <div class="order-summary-box">
+                    <h5>Order Summary</h5>
+                    <div class="order-summary-list" id="summaryList"></div>
+                    <div
+                        style="border-top: 1px solid rgba(212,175,55,0.2); margin-top: 0.5rem; padding-top: 0.4rem; display: flex; justify-content: space-between; font-weight: bold; color: var(--gold-bright);">
+                        <span>Total Payable:</span>
+                        <span id="summaryTotal">₦0.00</span>
+                    </div>
+                </div>
+
+                <div class="bank-details-box">
+                    <h4><i class="fa-solid fa-building-columns"></i> Bank Transfer Payment</h4>
+                    <div class="bank-info-row">
+                        <span>Bank Name:</span>
+                        <span>Providus bank</span>
+                    </div>
+                    <div class="bank-info-row">
+                        <span>Account Name:</span>
+                        <span>AMPLE MERCY</span>
+                    </div>
+                    <div class="bank-info-row">
+                        <span>Account Number:</span>
+                        <span>5401472106 <button class="copy-btn" onclick="copyAccount('5401472106')">Copy</button></span>
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 0.7rem; margin-top: 0.5rem; font-style: italic;">
+                        Please transfer the exact total amount to the account above and upload proof of payment below.
+                    </p>
+                </div>
+
+                <form class="checkout-form" id="checkoutForm">
+                    <div class="input-group">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="custName" placeholder="Full Name" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-phone"></i>
+                        <input type="tel" id="custPhone" placeholder="Phone Number" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-truck"></i>
+                        <textarea id="custAddress" placeholder="Delivery Address & City" required></textarea>
+                    </div>
+
+                    <div class="file-upload-wrapper">
+                        <label><i class="fa-solid fa-file-invoice"></i> Upload Payment Receipt / Proof</label>
+                        <input type="file" id="paymentProof" accept="image/*">
+                    </div>
+
+                    <button type="submit" class="btn-gold" id="placeOrderBtn" style="margin-top: 0.5rem;">
+                        Confirm & Place Order
+                    </button>
+                </form>
+            </div>
+        </div>
+
     </aside>
 
     <script>
@@ -406,12 +510,21 @@
         const displayUser = document.getElementById('displayUser');
         const cartBtn = document.getElementById('cartBtn');
         const closeCartBtn = document.getElementById('closeCartBtn');
+        const closeCheckoutBtn = document.getElementById('closeCheckoutBtn');
         const cartSidebar = document.getElementById('cartSidebar');
         const cartOverlay = document.getElementById('cartOverlay');
         const cartItemsContainer = document.getElementById('cartItemsContainer');
         const cartBadge = document.getElementById('cartBadge');
         const cartTotalAmount = document.getElementById('cartTotalAmount');
-        const checkoutBtn = document.getElementById('checkoutBtn');
+        const proceedCheckoutBtn = document.getElementById('proceedCheckoutBtn');
+
+        const cartView = document.getElementById('cartView');
+        const checkoutView = document.getElementById('checkoutView');
+        const backToCartBtn = document.getElementById('backToCartBtn');
+        const summaryList = document.getElementById('summaryList');
+        const summaryTotal = document.getElementById('summaryTotal');
+        const checkoutForm = document.getElementById('checkoutForm');
+        const custName = document.getElementById('custName');
 
         function formatNaira(amount) {
             return '₦' + Number(amount).toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -425,6 +538,7 @@
             }
             currentUser = user;
             displayUser.innerText = user.email || 'Client';
+            custName.value = user.email || '';
             document.body.style.display = 'block';
             hideLoader();
             loadCms();
@@ -567,39 +681,76 @@
             cartTotalAmount.innerText = formatNaira(total);
         }
 
-        function openCart() { cartSidebar.classList.add('active'); cartOverlay.classList.add('active'); }
+        function showCheckout() {
+            if (cart.length === 0) { alert("Your cart is empty! Add items before checking out."); return; }
+            summaryList.innerHTML = cart.map(item => `
+                <div class="summary-item">
+                    <span>${item.quantity || 1}x ${item.name}</span>
+                    <span>${formatNaira(item.price * (item.quantity || 1))}</span>
+                </div>
+            `).join('');
+            const total = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+            summaryTotal.innerText = formatNaira(total);
+            cartView.style.display = 'none';
+            checkoutView.classList.add('active');
+        }
+
+        function showCart() {
+            checkoutView.classList.remove('active');
+            cartView.style.display = 'flex';
+        }
+
+        function copyAccount(accNum) {
+            navigator.clipboard.writeText(accNum);
+            alert("Account number copied: " + accNum);
+        }
+
+        function openCart() { showCart(); cartSidebar.classList.add('active'); cartOverlay.classList.add('active'); }
         function closeCart() { cartSidebar.classList.remove('active'); cartOverlay.classList.remove('active'); }
 
         cartBtn.addEventListener('click', openCart);
         closeCartBtn.addEventListener('click', closeCart);
+        closeCheckoutBtn.addEventListener('click', closeCart);
         cartOverlay.addEventListener('click', closeCart);
+        proceedCheckoutBtn.addEventListener('click', showCheckout);
+        backToCartBtn.addEventListener('click', showCart);
 
-        checkoutBtn.addEventListener('click', async () => {
+        checkoutForm.addEventListener('submit', (e) => {
+            e.preventDefault();
             if (cart.length === 0) { alert("Your cart is empty."); return; }
+
+            const name = custName.value || (currentUser && currentUser.email) || 'Guest';
             const total = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+
             const order = {
-                name: (currentUser && currentUser.email) || 'Client',
+                name,
+                phone: document.getElementById('custPhone')?.value || '',
+                address: document.getElementById('custAddress')?.value || '',
                 userId: currentUser ? currentUser.uid : null,
                 items: cart,
                 total,
                 date: new Date().toISOString()
             };
-            try {
-                showLoader('Placing order...');
-                const docRef = await fbDb.collection('orders').add(order);
-                alert(`Order placed successfully! Reference: ${docRef.id}`);
-            } catch (err) {
-                console.error(err);
-                const localOrders = JSON.parse(localStorage.getItem('elobenze_orders') || '[]');
-                localOrders.push(order);
-                localStorage.setItem('elobenze_orders', JSON.stringify(localOrders));
-                alert('Order saved locally. We will sync when connection is available.');
-            } finally {
-                hideLoader();
-                cart = [];
-                saveCartAndUpdate();
-                closeCart();
-            }
+
+            (async () => {
+                try {
+                    showLoader('Placing order...');
+                    const docRef = await fbDb.collection('orders').add(order);
+                    alert(`Order Placed Successfully! Reference: ${docRef.id}`);
+                } catch (err) {
+                    console.error('Save order failed, storing locally', err);
+                    const localOrders = JSON.parse(localStorage.getItem('elobenze_orders') || '[]');
+                    localOrders.push(order);
+                    localStorage.setItem('elobenze_orders', JSON.stringify(localOrders));
+                    alert(`Order saved locally. Total: ${formatNaira(total)}. It will sync once the admin panel is online.`);
+                } finally {
+                    hideLoader();
+                    cart = [];
+                    saveCartAndUpdate();
+                    checkoutForm.reset();
+                    closeCart();
+                }
+            })();
         });
 
         updateCartUI();
