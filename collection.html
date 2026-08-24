@@ -491,14 +491,6 @@
             if (el) el.style.display = 'none';
         }
 
-        // Fallback catalog if Firestore has nothing tagged for this page yet.
-        const DEFAULT_PRODUCTS = [
-            { id: 'default-1', name: "Gold Chronograph Watch", price: 450000, category: "Boys", page: "collection", imgUrl: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500&auto=format&fit=crop&q=60" },
-            { id: 'default-2', name: "Luxury Leather Wallet", price: 120000, category: "Girls", page: "collection", imgUrl: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=500&auto=format&fit=crop&q=60" },
-            { id: 'default-3', name: "Royal Signet Ring", price: 280000, category: "Boys", page: "collection", imgUrl: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500&auto=format&fit=crop&q=60" },
-            { id: 'default-4', name: "Designer Sunglasses", price: 195000, category: "Girls", page: "collection", imgUrl: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500&auto=format&fit=crop&q=60" }
-        ];
-
         let products = [];
         let currentUser = null;
         let cart = JSON.parse(localStorage.getItem('elobenze_cart')) || [];
@@ -564,11 +556,11 @@
                 const items = [];
                 snapshot.forEach(doc => items.push({ id: doc.id, ...doc.data() }));
                 const collectionItems = items.filter(p => p.page === 'collection' || p.page === 'both' || !p.page);
-                products = collectionItems.length > 0 ? collectionItems : DEFAULT_PRODUCTS;
+                products = collectionItems;
                 renderProducts();
             }, err => {
-                console.error('Product load failed, using defaults', err);
-                products = DEFAULT_PRODUCTS;
+                console.error('Product load failed', err);
+                products = [];
                 renderProducts();
             });
         }
