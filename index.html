@@ -956,14 +956,6 @@
             if (el) el.style.display = 'none';
         }
 
-        // Fallback catalog shown only if Firestore has no products yet
-        // (e.g. brand new project before the admin has added anything).
-        const DEFAULT_PRODUCTS = [
-            { id: 'default-1', name: "Gold Chronograph Watch", price: 450000, category: "Boys", page: "landing", imgUrl: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500&auto=format&fit=crop&q=60" },
-            { id: 'default-2', name: "Luxury Leather Wallet", price: 120000, category: "Girls", page: "landing", imgUrl: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=500&auto=format&fit=crop&q=60" },
-            { id: 'default-3', name: "Royal Signet Ring", price: 280000, category: "Boys", page: "landing", imgUrl: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500&auto=format&fit=crop&q=60" }
-        ];
-
         let products = [];
         let currentUser = null;
         let cart = JSON.parse(localStorage.getItem('elobenze_cart')) || [];
@@ -1034,22 +1026,26 @@
             }).catch(err => console.error('CMS load failed', err));
         }
 
-        // ---- PRODUCTS: live from Firestore so admin edits show up here ----
+        // ---- FEATURED PRODUCTS: live from Firestore 'featuredProducts' collection,
+        // managed from admin.html's Featured Products tab, capped at 4 items.
         function loadProducts() {
-            fbDb.collection('products').onSnapshot(snapshot => {
+            fbDb.collection('featuredProducts').orderBy('order', 'asc').onSnapshot(snapshot => {
                 const items = [];
                 snapshot.forEach(doc => items.push({ id: doc.id, ...doc.data() }));
-                const landingItems = items.filter(p => p.page === 'landing' || p.page === 'both' || !p.page);
-                products = landingItems.length > 0 ? landingItems : DEFAULT_PRODUCTS;
+                products = items.slice(0, 4);
                 renderProducts();
             }, err => {
-                console.error('Product load failed, using defaults', err);
-                products = DEFAULT_PRODUCTS;
+                console.error('Featured products load failed', err);
+                products = [];
                 renderProducts();
             });
         }
 
         function renderProducts() {
+            if (products.length === 0) {
+                productGrid.innerHTML = '<p style="color: var(--text-muted); text-align: center; grid-column: 1 / -1;">No featured products yet. Check back soon.</p>';
+                return;
+            }
             productGrid.innerHTML = products.map(item => `
                 <div class="product-card">
                     <div class="product-card-img-wrapper">

@@ -136,6 +136,15 @@
             border-color: var(--gold-bright); box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
         }
 
+        .cap-note {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: -0.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .cap-note.cap-full { color: var(--danger); font-weight: 600; }
+
         #globalLoader {
             position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
             background: var(--bg-main); z-index: 100000;
@@ -225,6 +234,7 @@
         <ul class="sidebar-menu">
             <li><a href="#" class="active" onclick="switchTab(event, 'dashboardTab')"><i class="fa-solid fa-chart-line"></i><span>Dashboard</span></a></li>
             <li><a href="#" onclick="switchTab(event, 'productsTab')"><i class="fa-solid fa-box-open"></i><span>Manage Products</span></a></li>
+            <li><a href="#" onclick="switchTab(event, 'featuredTab')"><i class="fa-solid fa-star"></i><span>Featured Products</span></a></li>
             <li><a href="#" onclick="switchTab(event, 'landingCMS')"><i class="fa-solid fa-laptop-code"></i><span>Landing Page CMS</span></a></li>
             <li><a href="#" onclick="switchTab(event, 'collectionCMS')"><i class="fa-solid fa-layer-group"></i><span>Collection Page CMS</span></a></li>
             <li><a href="#" onclick="switchTab(event, 'messagesTab')"><i class="fa-solid fa-envelope"></i><span>Contact Messages</span></a></li>
@@ -306,6 +316,8 @@
                         </div>
                     </div>
 
+                    <p class="cap-note" id="landingCapNote">Featured Products (landing page) slots used: 0 / 4</p>
+
                     <div class="form-group">
                         <label>Image URL or Base64 String</label>
                         <input type="text" id="prodImage" placeholder="Paste image link or upload below" required>
@@ -324,6 +336,58 @@
                 <table class="admin-table">
                     <thead><tr><th>Image</th><th>Title</th><th>Category</th><th>Price</th><th>Placement</th><th>Actions</th></tr></thead>
                     <tbody id="inventoryTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="tab-panel" id="featuredTab">
+            <div class="panel-card">
+                <div class="panel-header"><h3 id="featuredFormTitle">Add Featured Product</h3></div>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 1rem;">
+                    These are the items shown in the "Featured Products" section on the storefront's landing page.
+                    Up to <strong>4</strong> may be active at once.
+                </p>
+                <form id="featuredForm">
+                    <input type="hidden" id="editFeaturedId">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Product Name</label>
+                            <input type="text" id="featName" placeholder="e.g. Gold Chronograph Watch" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Price (₦)</label>
+                            <input type="number" id="featPrice" placeholder="e.g. 450000" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Category (Gender / Kids)</label>
+                            <select id="featCategory" required>
+                                <option value="Boys">Boys</option>
+                                <option value="Girls">Girls</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <p class="cap-note" id="featuredCapNote">Featured Products used: 0 / 4</p>
+
+                    <div class="form-group">
+                        <label>Image URL or Base64 String</label>
+                        <input type="text" id="featImage" placeholder="Paste image link or upload below" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Or Upload Product Image File</label>
+                        <input type="file" id="featFileInput" accept="image/*" onchange="handleFileUpload(event, 'featImage')">
+                    </div>
+
+                    <button type="submit" class="btn-gold" style="margin-top: 1rem;" id="saveFeaturedBtn"><i class="fa-solid fa-floppy-disk"></i> Save Featured Product</button>
+                    <button type="button" class="btn-edit" style="margin-top: 1rem; display: none;" id="cancelFeaturedEditBtn" onclick="cancelFeaturedEdit()">Cancel Edit</button>
+                </form>
+            </div>
+
+            <div class="panel-card">
+                <div class="panel-header"><h3>Featured Products (Landing Page)</h3></div>
+                <table class="admin-table">
+                    <thead><tr><th>Image</th><th>Title</th><th>Category</th><th>Price</th><th>Actions</th></tr></thead>
+                    <tbody id="featuredTable"></tbody>
                 </table>
             </div>
         </div>
@@ -399,10 +463,17 @@
     </main>
 
     <script>
+        // Featured Products (landing page) may only ever hold this many items.
+        const LANDING_PRODUCT_CAP = 4;
+        // Separate cap for the dedicated "Featured Products" collection used
+        // by index.html's hero-facing Featured Products section.
+        const FEATURED_PRODUCT_CAP = 4;
+
         function formatNaira(amount) { return '₦' + Number(amount).toLocaleString('en-NG'); }
 
         // Local caches populated by Firestore onSnapshot listeners below.
         let products = [];
+        let featuredProducts = [];
         let orders = [];
         let messages = [];
         let cmsConfig = {};
@@ -427,6 +498,7 @@
             const titleMap = {
                 'dashboardTab': 'Dashboard Overview',
                 'productsTab': 'Product Inventory Manager',
+                'featuredTab': 'Featured Products (Landing Page)',
                 'landingCMS': 'Landing Page Content Management',
                 'collectionCMS': 'Collection Page Customization',
                 'messagesTab': 'Contact Form Messages',
@@ -441,6 +513,82 @@
                 const reader = new FileReader();
                 reader.onload = function (e) { document.getElementById(targetInputId).value = e.target.result; };
                 reader.readAsDataURL(file);
+            }
+        }
+
+        // Products counted as "on landing" are those set to Landing Only or Both —
+        // matches exactly what index.html's Featured Products section pulls in.
+        function countLandingProducts(excludeId) {
+            return products.filter(p =>
+                (p.page === 'landing' || p.page === 'both') && p.id !== excludeId
+            ).length;
+        }
+
+        function updateLandingCapNote() {
+            const editId = document.getElementById('editProductId').value || null;
+            const count = countLandingProducts(editId);
+            const note = document.getElementById('landingCapNote');
+            note.innerText = `Featured Products (landing page) slots used: ${count} / ${LANDING_PRODUCT_CAP}`;
+            note.classList.toggle('cap-full', count >= LANDING_PRODUCT_CAP);
+        }
+
+        // ---- Featured Products cap helpers ----
+        function updateFeaturedCapNote() {
+            const editId = document.getElementById('editFeaturedId').value || null;
+            const count = featuredProducts.filter(p => p.id !== editId).length;
+            const note = document.getElementById('featuredCapNote');
+            note.innerText = `Featured Products used: ${count} / ${FEATURED_PRODUCT_CAP}`;
+            note.classList.toggle('cap-full', count >= FEATURED_PRODUCT_CAP);
+            document.getElementById('saveFeaturedBtn').disabled = (!editId && count >= FEATURED_PRODUCT_CAP);
+        }
+
+        function renderFeaturedTable() {
+            document.getElementById('featuredTable').innerHTML = featuredProducts.length ? featuredProducts.map(p => `
+                <tr>
+                    <td><img src="${p.imgUrl}" alt="${p.name}"></td>
+                    <td><strong>${p.name}</strong></td>
+                    <td><span style="color: var(--gold-bright);">${p.category || 'Boys'}</span></td>
+                    <td>${formatNaira(p.price)}</td>
+                    <td>
+                        <button class="btn-edit" onclick="editFeaturedProduct('${p.id}')"><i class="fa-solid fa-pen"></i></button>
+                        <button class="btn-danger" onclick="deleteFeaturedProduct('${p.id}')"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('') : '<tr><td colspan="5" style="text-align:center; color: var(--text-muted);">No featured products yet.</td></tr>';
+            updateFeaturedCapNote();
+        }
+
+        function editFeaturedProduct(id) {
+            const p = featuredProducts.find(item => item.id === id);
+            if (p) {
+                document.getElementById('editFeaturedId').value = p.id;
+                document.getElementById('featName').value = p.name;
+                document.getElementById('featPrice').value = p.price;
+                document.getElementById('featCategory').value = p.category || 'Boys';
+                document.getElementById('featImage').value = p.imgUrl;
+                document.getElementById('featuredFormTitle').innerText = 'Edit Featured Product';
+                document.getElementById('cancelFeaturedEditBtn').style.display = 'inline-flex';
+                updateFeaturedCapNote();
+                switchTab(null, 'featuredTab');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function cancelFeaturedEdit() {
+            document.getElementById('editFeaturedId').value = '';
+            document.getElementById('featuredForm').reset();
+            document.getElementById('featuredFormTitle').innerText = 'Add Featured Product';
+            document.getElementById('cancelFeaturedEditBtn').style.display = 'none';
+            updateFeaturedCapNote();
+        }
+
+        async function deleteFeaturedProduct(id) {
+            if (!confirm('Remove this featured product from the landing page?')) return;
+            try {
+                await fbDb.collection('featuredProducts').doc(id).delete();
+            } catch (err) {
+                console.error(err);
+                alert('Could not delete featured product: ' + err.message);
             }
         }
 
@@ -476,6 +624,7 @@
                     </td>
                 </tr>
             `).join('');
+            updateLandingCapNote();
         }
 
         function renderMessagesTable() {
@@ -533,6 +682,13 @@
                 renderInventoryTable();
             }, err => console.error('Products listener failed', err)));
 
+            // Live featured products list (landing page hero section, capped at 4)
+            unsubscribers.push(fbDb.collection('featuredProducts').orderBy('order', 'asc').onSnapshot(snapshot => {
+                featuredProducts = [];
+                snapshot.forEach(doc => featuredProducts.push({ id: doc.id, ...doc.data() }));
+                renderFeaturedTable();
+            }, err => console.error('Featured products listener failed', err)));
+
             // Live orders list (most recent 100)
             unsubscribers.push(fbDb.collection('orders').orderBy('date', 'desc').limit(100).onSnapshot(snapshot => {
                 orders = [];
@@ -555,6 +711,9 @@
                 populateCmsForms();
             }, err => console.error('CMS listener failed', err)));
 
+            // Keep the cap note live as the Page dropdown or edit target changes
+            document.getElementById('prodPage').addEventListener('change', updateLandingCapNote);
+
             // ---- Product form ----
             document.getElementById('productForm').addEventListener('submit', async function (e) {
                 e.preventDefault();
@@ -568,6 +727,19 @@
                     imgUrl: document.getElementById('prodImage').value
                 };
 
+                // Enforce the 4-product cap on Featured Products (landing/both).
+                // Only blocks when this save would ADD a new landing slot —
+                // editing a product that's already counted, or moving it to
+                // "Collection Page Only", is always allowed.
+                const willBeOnLanding = data.page === 'landing' || data.page === 'both';
+                if (willBeOnLanding) {
+                    const currentLandingCount = countLandingProducts(editId || null);
+                    if (currentLandingCount >= LANDING_PRODUCT_CAP) {
+                        alert(`Only ${LANDING_PRODUCT_CAP} products are allowed on the Featured Products (landing page) section. Delete one, or set this product to "Collection Page Only", before adding another.`);
+                        return;
+                    }
+                }
+
                 saveBtn.disabled = true;
                 try {
                     if (editId) {
@@ -578,10 +750,52 @@
                     document.getElementById('editProductId').value = '';
                     document.getElementById('productFormTitle').innerText = 'Add New Product';
                     this.reset();
+                    updateLandingCapNote();
                     alert('Product saved successfully!');
                 } catch (err) {
                     console.error(err);
                     alert('Could not save product: ' + err.message);
+                } finally {
+                    saveBtn.disabled = false;
+                }
+            });
+
+            // ---- Featured Products form ----
+            document.getElementById('featuredForm').addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const saveBtn = document.getElementById('saveFeaturedBtn');
+                const editId = document.getElementById('editFeaturedId').value;
+                const data = {
+                    name: document.getElementById('featName').value,
+                    price: Number(document.getElementById('featPrice').value),
+                    category: document.getElementById('featCategory').value,
+                    imgUrl: document.getElementById('featImage').value
+                };
+
+                // Enforce the 4-item cap. Only blocks when this save would ADD
+                // a brand-new featured product — editing an existing one is
+                // always allowed regardless of current count.
+                if (!editId) {
+                    const currentCount = featuredProducts.length;
+                    if (currentCount >= FEATURED_PRODUCT_CAP) {
+                        alert(`Only ${FEATURED_PRODUCT_CAP} Featured Products are allowed. Delete one before adding another.`);
+                        return;
+                    }
+                    data.order = currentCount;
+                }
+
+                saveBtn.disabled = true;
+                try {
+                    if (editId) {
+                        await fbDb.collection('featuredProducts').doc(editId).set(data, { merge: true });
+                    } else {
+                        await fbDb.collection('featuredProducts').add(data);
+                    }
+                    cancelFeaturedEdit();
+                    alert('Featured product saved successfully!');
+                } catch (err) {
+                    console.error(err);
+                    alert('Could not save featured product: ' + err.message);
                 } finally {
                     saveBtn.disabled = false;
                 }
@@ -638,6 +852,7 @@
                 document.getElementById('prodPage').value = p.page || 'both';
                 document.getElementById('prodImage').value = p.imgUrl;
                 document.getElementById('productFormTitle').innerText = 'Edit Product';
+                updateLandingCapNote();
                 switchTab(null, 'productsTab');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
